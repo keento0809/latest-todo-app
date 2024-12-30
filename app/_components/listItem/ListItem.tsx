@@ -17,7 +17,7 @@ export const ListItem = ({ todo, action }: ListCardProps) => {
         <AlertDialog.Trigger>
           <PlusIcon className="size-3 shrink-0 transition-all ease-out group-data-[panel-open]:scale-110 rotate-45 cursor-pointer" />
         </AlertDialog.Trigger>
-        <DeleteDialog todoId={todo.id} action={action} />
+        <DeleteDialog todo={todo} action={action} />
       </AlertDialog.Root>
     </li>
   );
