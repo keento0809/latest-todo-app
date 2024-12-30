@@ -15,6 +15,21 @@ export const useHome = () => {
             todos: [...prevState.todos, newTodo],
           };
         }
+        case "UPDATE": {
+          const updateTodoId = formData.get("todoId") as string;
+          return {
+            todos: prevState.todos.map((todo) => {
+              if (todo.id === updateTodoId) {
+                return {
+                  ...todo,
+                  title: formData.get("title") as string,
+                  isCompleted: formData.get("isCompleted") === "true",
+                };
+              }
+              return todo;
+            }),
+          };
+        }
         case "DELETE": {
           const deleteTodoId = formData.get("todoId") as string;
           return {
