@@ -15,7 +15,11 @@ export const HomeContainer = ({ todos }: HomeContainerProps) => {
   return (
     <div className="flex flex-col gap-16">
       <TodoForm action={setStateAction} isPending={isPending} />
-      <TodoList todoState={todoState} action={setStateAction} />
+      <TodoList
+        todoState={todoState}
+        action={setStateAction}
+        isPending={isPending}
+      />
     </div>
   );
 };

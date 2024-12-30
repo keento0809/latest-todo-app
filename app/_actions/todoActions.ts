@@ -1,13 +1,13 @@
 "use server";
 
-import { eq, not } from "drizzle-orm";
+import { desc, eq, not } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "@/app/_db/drizzle";
 import { todo } from "@/app/_db/schema";
 import { Todo } from "../_types/home/home";
 
 export const getTodos = async (): Promise<Todo[]> => {
-  const data = await db.select().from(todo);
+  const data = await db.select().from(todo).orderBy(desc(todo.updatedAt));
   return data;
 };
 
