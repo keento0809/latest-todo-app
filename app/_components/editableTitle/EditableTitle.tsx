@@ -11,7 +11,7 @@ export const EditableTitle = ({ todo, action }: EditableTitleProps) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger className="cursor-pointer">
-        <span>{todo.title}</span>
+        {todo.title}
       </AlertDialog.Trigger>
       <UpdateDialog todo={todo} action={action} />
     </AlertDialog.Root>
