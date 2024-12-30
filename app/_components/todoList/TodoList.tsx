@@ -1,19 +1,16 @@
-import { TodoObj } from "@/app/Home";
+import { TodoObj } from "@/app/_types/home/home";
+import { ListItem } from "../listItem/ListItem";
 
 type TodoListProps = {
   todoState: TodoObj;
+  action: (payload: FormData) => void;
 };
 
-export const TodoList = ({ todoState }: TodoListProps) => {
+export const TodoList = ({ todoState, action }: TodoListProps) => {
   return (
-    <ul className="min-h-[400px]">
-      {todoState.todos.map((todo, index) => (
-        <li
-          key={todo + index}
-          className="text-slate-800 py-2 border-b border-purple-500"
-        >
-          {todo}
-        </li>
+    <ul className="min-h-[400px] overflow-y-scroll">
+      {todoState.todos.map((todo) => (
+        <ListItem key={todo.id} todo={todo} action={action} />
       ))}
     </ul>
   );
