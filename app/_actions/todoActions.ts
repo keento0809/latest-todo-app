@@ -34,17 +34,20 @@ export const toggleTodo = async ({ id }: { id: number }) => {
   revalidatePath("/");
 };
 
-export const editTodo = async ({
+export const updateTodo = async ({
   id,
   title,
+  isCompleted,
 }: {
   id: number;
   title: string;
+  isCompleted: boolean;
 }) => {
   await db
     .update(todo)
     .set({
       title: title,
+      isCompleted: isCompleted,
     })
     .where(eq(todo.id, id));
   revalidatePath("/");
