@@ -1,15 +1,9 @@
 "use server";
 
-import { desc, eq, not } from "drizzle-orm";
+import { eq, not } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "@/app/_db/drizzle";
 import { todo } from "@/app/_db/schema";
-import { Todo } from "../_types/home/home";
-
-export const getTodos = async (): Promise<Todo[]> => {
-  const data = await db.select().from(todo).orderBy(desc(todo.updatedAt));
-  return data;
-};
 
 export const addTodo = async ({ id, title }: { id: number; title: string }) => {
   await db.insert(todo).values({
@@ -17,6 +11,7 @@ export const addTodo = async ({ id, title }: { id: number; title: string }) => {
     title,
     isCompleted: false,
   });
+  revalidatePath("/");
 };
 
 export const deleteTodo = async ({ id }: { id: number }) => {
