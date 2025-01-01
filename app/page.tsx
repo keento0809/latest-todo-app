@@ -1,12 +1,20 @@
-import { getTodos } from "./_actions/todoActions";
+import { InferResponseType } from "hono";
 import { HomeContainer } from "./Home";
+import { fetcher } from "./_libs/fetcher";
+import { client } from "./_libs/hono";
 
 export default async function Home() {
-  const todos = await getTodos();
+  const url = client.api.todos.$url();
+  type ResponseType = InferResponseType<typeof client.api.todos.$get>;
+
+  const res = await fetcher<ResponseType>({
+    url: url.toString(),
+    args: { next: { tags: ["todos"] } },
+  });
 
   return (
     <div className="min-h-svh flex justify-center items-center">
-      <HomeContainer todos={todos} />
+      <HomeContainer todos={res.todos} />
     </div>
   );
 }
