@@ -11,7 +11,9 @@ export const apiClient = axios.create({
 export async function makeApiRequest<TRequest, TResponse>(
   config: AxiosRequestConfig<TRequest>
 ): Promise<TResponse> {
-  const response = await apiClient.request<TResponse>(config);
+  const response: { data: TResponse } = await apiClient.request<TResponse>(
+    config
+  );
 
   return response.data;
 }
