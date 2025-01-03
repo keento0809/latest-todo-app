@@ -9,10 +9,11 @@ const app = new Hono()
 
     return c.json({ todos }, 200);
   })
-  .get("/:todoId", async (c) => {
-    const { todoId } = c.req.param();
+  .get("/:id", async (c) => {
+    const { id } = c.req.param();
+    console.log("reqうううううう", c.req.param());
     const todoItem = await db.query.todo.findFirst({
-      where: eq(todo.id, Number(todoId)),
+      where: eq(todo.id, Number(id)),
     });
 
     return c.json({ todo: todoItem }, 200);
