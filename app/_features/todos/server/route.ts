@@ -11,7 +11,6 @@ const app = new Hono()
   })
   .get("/:id", async (c) => {
     const { id } = c.req.param();
-    console.log("reqうううううう", c.req.param());
     const todoItem = await db.query.todo.findFirst({
       where: eq(todo.id, Number(id)),
     });
