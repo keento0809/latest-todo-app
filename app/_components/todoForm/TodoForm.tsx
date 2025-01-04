@@ -1,3 +1,5 @@
+import RadioGroup from "../_ui/radioGroup/RadioGroup";
+
 type TodoFormProps = {
   action: (payload: FormData) => void;
   isPending: boolean;
@@ -20,6 +22,9 @@ export const TodoForm = ({ action, isPending }: TodoFormProps) => {
           name="title"
           className="rounded-lg outline-none border-2 border-slate-800 text-slate-800 py-2 pl-3"
         />
+      </section>
+      <section>
+        <RadioGroup />
       </section>
       <button
         type="submit"
