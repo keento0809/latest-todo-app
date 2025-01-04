@@ -1,10 +1,16 @@
+import { TodoFields } from "@/app/_types/home/home";
 import { Radio } from "@base-ui-components/react/radio";
 import { RadioGroup as BaseRadioGroup } from "@base-ui-components/react/radio-group";
 
-export default function RadioGroup() {
+type RadioGroupProps = {
+  fields: TodoFields;
+};
+
+export const RadioGroup = ({ fields }: RadioGroupProps) => {
   return (
     <BaseRadioGroup
-      name="isCompleted"
+      key={fields.isCompleted.key}
+      name={fields.isCompleted.name}
       defaultValue={false}
       className="flex items-start gap-8 text-gray-900"
     >
@@ -31,4 +37,4 @@ export default function RadioGroup() {
       </label>
     </BaseRadioGroup>
   );
-}
+};

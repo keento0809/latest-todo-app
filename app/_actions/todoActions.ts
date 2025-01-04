@@ -11,7 +11,7 @@ export const addTodo = async ({ formData }: { formData: FormData }) => {
   const submission = parseWithZod(formData, { schema: todoSchema });
 
   if (submission.status !== "success") {
-    return;
+    return submission.reply();
   }
 
   const id = Math.floor(Math.random() * 100000);
