@@ -11,7 +11,6 @@ export const RadioGroup = ({ fields }: RadioGroupProps) => {
     <BaseRadioGroup
       key={fields.isCompleted.key}
       name={fields.isCompleted.name}
-      defaultValue={fields.isCompleted.value === "true"}
       className="flex items-start gap-8 text-gray-900"
     >
       <div className="font-medium" id="apples-caption">

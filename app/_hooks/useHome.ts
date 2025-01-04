@@ -18,7 +18,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
           const newTodo: Todo = {
             id: generateRandomDigits(),
             title: formData.get("title") as string,
-            isCompleted: "false",
+            isCompleted: formData.get("isCompleted") as "true" | "false",
           };
 
           await addTodo({ formData });

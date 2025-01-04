@@ -10,7 +10,7 @@ type EditableTitleProps = {
 export const EditableTitle = ({ todo, action }: EditableTitleProps) => {
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger className="cursor-pointer">
+      <AlertDialog.Trigger className="flex-1 cursor-pointer text-left">
         {todo.title}
       </AlertDialog.Trigger>
       <UpdateDialog todo={todo} action={action} />
