@@ -13,6 +13,7 @@ export const ListItem = ({ todo, action }: ListCardProps) => {
   return (
     <li className="flex justify-between px-2 items-center text-md border-b border-purple-500 py-1.5">
       <EditableTitle todo={todo} action={action} />
+      <span className="block text-md">{todo.isCompleted}</span>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
           <PlusIcon className="size-3 shrink-0 transition-all ease-out group-data-[panel-open]:scale-110 rotate-45 cursor-pointer" />
