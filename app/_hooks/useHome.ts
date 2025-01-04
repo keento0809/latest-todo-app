@@ -5,9 +5,6 @@ import { generateRandomDigits } from "../_utils/utils";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { todoSchema } from "../_libs/zodSchema";
-import { db } from "../_db/drizzle";
-import { todo } from "../_db/schema";
-import { revalidatePath } from "next/cache";
 
 type UseHomeProps = {
   todos: Todo[];
@@ -71,27 +68,6 @@ export const useHome = ({ todos }: UseHomeProps) => {
     { todos }
   );
 
-  const [result, action, isResultPending] = useActionState(
-    async (_: unknown, formData: FormData) => {
-      const submission = parseWithZod(formData, { schema: todoSchema });
-
-      if (submission.status !== "success") {
-        return;
-      }
-
-      const id = Math.floor(Math.random() * 100000);
-      const title = submission.value.title;
-
-      await db.insert(todo).values({
-        id,
-        title,
-        isCompleted: false,
-      });
-      revalidatePath("/");
-    },
-    undefined
-  );
-
   const [form, fields] = useForm({
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: todoSchema });
@@ -106,8 +82,5 @@ export const useHome = ({ todos }: UseHomeProps) => {
     isPending,
     form,
     fields,
-    result,
-    action,
-    isResultPending,
   };
 };
