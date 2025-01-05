@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+export { auth as middlewareAuth } from "@/auth";
 
 export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
