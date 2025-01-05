@@ -2391,6 +2391,13 @@ json5@^1.0.2:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+justd-icons@^1.10.10:
+  version "1.10.10"
+  resolved "https://registry.yarnpkg.com/justd-icons/-/justd-icons-1.10.10.tgz#43990ddb05e2b1dfce2622b95e61a1824335c6a6"
+  integrity sha512-lj84SyC9QcSGAEhytDwY/sL+TD4pp593/MWtaWiFT1SO0QvAIw7vQtCvmVl5H2e8/yhvmHVWvZKDh8BpwhrvKQ==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+
 keyv@^4.5.4:
   version "4.5.4"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.5.4.tgz#a879a99e29452f942439f2a405e3af8b31d4de93"

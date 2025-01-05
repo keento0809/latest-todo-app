@@ -25,7 +25,7 @@ export const TodoForm = ({
     >
       <input type="text" name="actionType" defaultValue="ADD" hidden />
       <section className="flex flex-col gap-2">
-        <label htmlFor="title" className="text-2xl font-semibold">
+        <label id="title" className="text-xl font-semibold">
           Title
         </label>
         <input
