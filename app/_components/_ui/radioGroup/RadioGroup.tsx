@@ -1,17 +1,20 @@
 import { TodoFields } from "@/app/_types/home/home";
 import { Radio } from "@base-ui-components/react/radio";
 import { RadioGroup as BaseRadioGroup } from "@base-ui-components/react/radio-group";
+import { useInputControl } from "@conform-to/react";
 
 type RadioGroupProps = {
   fields: TodoFields;
 };
 
 export const RadioGroup = ({ fields }: RadioGroupProps) => {
+  const control = useInputControl(fields.isCompleted);
+
   return (
     <BaseRadioGroup
       key={fields.isCompleted.key}
       name={fields.isCompleted.name}
-      defaultValue={fields.isCompleted.value === "true"}
+      onValueChange={(value) => control.change(value as string)}
       className="flex items-start gap-8 text-gray-900"
     >
       <div className="font-medium" id="apples-caption">
@@ -19,7 +22,7 @@ export const RadioGroup = ({ fields }: RadioGroupProps) => {
       </div>
       <label className="flex items-center gap-2">
         <Radio.Root
-          value={true}
+          value="true"
           className="flex size-5 items-center justify-center rounded-full outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 data-[checked]:bg-gray-900 data-[unchecked]:border data-[unchecked]:border-gray-300"
         >
           <Radio.Indicator className="flex before:size-2 before:rounded-full before:bg-gray-50 data-[unchecked]:hidden cursor-pointer" />
@@ -28,7 +31,7 @@ export const RadioGroup = ({ fields }: RadioGroupProps) => {
       </label>
       <label className="flex items-center gap-2">
         <Radio.Root
-          value={false}
+          value="false"
           className="flex size-5 items-center justify-center rounded-full outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 data-[checked]:bg-gray-900 data-[unchecked]:border data-[unchecked]:border-gray-300"
         >
           <Radio.Indicator className="flex before:size-2 before:rounded-full before:bg-gray-50 data-[unchecked]:hidden cursor-pointer" />

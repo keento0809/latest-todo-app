@@ -6,5 +6,7 @@ export const todoSchema = z.object({
     .trim()
     .min(1, { message: "Title is required" })
     .max(100, { message: "Title is too long" }),
-  isCompleted: z.union([z.literal("true"), z.literal("false")]),
+  isCompleted: z.union([z.literal("true"), z.literal("false")], {
+    errorMap: () => ({ message: "isCompleted is required" }),
+  }),
 });

@@ -16,11 +16,12 @@ export const addTodo = async ({ formData }: { formData: FormData }) => {
 
   const id = Math.floor(Math.random() * 100000);
   const title = submission.value.title;
+  const isCompleted = submission.value.isCompleted === "true";
 
   await db.insert(todo).values({
     id,
     title,
-    isCompleted: false,
+    isCompleted,
   });
   revalidatePath("/");
 };
