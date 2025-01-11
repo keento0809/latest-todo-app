@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/app/_db/drizzle";
 import { todo } from "@/app/_db/schema";
 import { parseWithZod } from "@conform-to/zod";
-import { todoSchema } from "../_libs/zodSchema";
+import { todoSchema } from "@/app/_libs/zodSchema";
 
 export const addTodo = async ({ formData }: { formData: FormData }) => {
   const submission = parseWithZod(formData, { schema: todoSchema });
