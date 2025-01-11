@@ -34,6 +34,7 @@ export const useSignupForm = () => {
         throw new Error("Invalid signup result type");
       }
 
+      // implement signin after completing signup
       await signIn("credentials", {
         email: signupResult.data.email,
         password: signupResult.data.password,
