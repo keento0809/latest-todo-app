@@ -1,6 +1,6 @@
 import { Todo } from "@/app/_types/home/home";
 import { AlertDialog } from "@base-ui-components/react";
-import { UpdateDialog } from "../_ui/dialogs/updateDialog/UpdateDialog";
+import { UpdateDialog } from "../../dialogs/updateDialog/UpdateDialog";
 
 type EditableTitleProps = {
   todo: Todo;

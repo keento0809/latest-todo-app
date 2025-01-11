@@ -21,7 +21,7 @@ export const SigninForm = () => {
         onSubmit={form.onSubmit}
         action={action}
         noValidate
-        className="flex flex-col gap-10 min-w-[400px] mx-auto"
+        className="flex flex-col gap-6 min-w-[400px] mx-auto"
       >
         <Field.Root name="username" className="flex flex-col items-start gap-1">
           <Field.Label className="text-sm font-medium text-gray-900">
@@ -80,7 +80,7 @@ export const SigninForm = () => {
       </div>
       <button
         type="button"
-        className="mt-10 flex items-center gap-1 py-2 px-8 rounded-lg border-2 border-slate-500 hover:scale-105 transition-all mx-auto"
+        className="mt-6 flex items-center gap-1 py-2 px-8 rounded-lg border-2 border-slate-500 hover:scale-105 transition-all mx-auto"
         disabled={isPendingTransition}
         onClick={() => {
           startTransition(async () => {
