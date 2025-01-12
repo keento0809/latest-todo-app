@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-// export { auth as middlewareAuth } from "@/auth";
 import { auth } from "@/auth";
 
 export default auth(async (request: NextRequest) => {
   const session = await auth();
+  const url = request.nextUrl.clone();
 
-  if (!session) {
+  if (!session && url.pathname !== "/signin") {
+    url.pathname = "/signin";
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 
