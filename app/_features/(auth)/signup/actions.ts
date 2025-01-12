@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/app/_db/drizzle";
 import { users } from "@/app/_db/schema";
 import { signupSchema } from "@/app/_libs/zodSchema";
