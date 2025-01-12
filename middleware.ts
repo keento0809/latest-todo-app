@@ -5,7 +5,7 @@ export default auth(async (request: NextRequest) => {
   const session = await auth();
   const url = request.nextUrl.clone();
 
-  if (!session && url.pathname !== "/signin") {
+  if (!session && url.pathname !== "/signin" && url.pathname !== "/signup") {
     url.pathname = "/signin";
     return NextResponse.redirect(new URL("/signin", request.url));
   }
