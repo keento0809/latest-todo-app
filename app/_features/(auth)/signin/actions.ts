@@ -1,3 +1,5 @@
+"use server";
+
 import { signinSchema } from "@/app/_libs/zodSchema";
 import { parseWithZod } from "@conform-to/zod";
 import { signIn } from "next-auth/react";

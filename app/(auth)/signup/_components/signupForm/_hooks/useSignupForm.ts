@@ -24,7 +24,7 @@ export const useSignupForm = () => {
       const signupResult = await signup({ formData });
 
       if (signupResult.error) {
-        throw new Error(`Failed to signup: ${signupResult.error.message}`);
+        throw new Error(`Failed to signup: ${signupResult.error}`);
       }
 
       // ensure the result is of the correct type

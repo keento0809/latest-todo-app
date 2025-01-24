@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 
-export default auth(async (request: NextRequest) => {
+export default auth(async function middleware(request: NextRequest) {
   const session = await auth();
   const url = request.nextUrl.clone();
 
