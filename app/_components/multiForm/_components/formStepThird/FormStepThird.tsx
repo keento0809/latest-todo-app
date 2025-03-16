@@ -2,14 +2,13 @@ import { useFormContext } from "react-hook-form";
 
 type FormStepThirdProps = {
   onPrev: () => void;
-  onSubmit: () => void;
 };
 
-export const FormStepThird = ({ onPrev, onSubmit }: FormStepThirdProps) => {
-  const { register, handleSubmit } = useFormContext();
+export const FormStepThird = ({ onPrev }: FormStepThirdProps) => {
+  const { register } = useFormContext();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <div>
       <section className="flex flex-col gap-2">
         <label htmlFor="password" id="password">
           Password:
@@ -35,6 +34,6 @@ export const FormStepThird = ({ onPrev, onSubmit }: FormStepThirdProps) => {
           Submit
         </button>
       </section>
-    </form>
+    </div>
   );
 };

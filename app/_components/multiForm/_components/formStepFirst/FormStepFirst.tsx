@@ -5,10 +5,10 @@ type FormStepFirstProps = {
 };
 
 export const FormStepFirst = ({ onNext }: FormStepFirstProps) => {
-  const { register, handleSubmit } = useFormContext();
+  const { register } = useFormContext();
 
   return (
-    <form onSubmit={handleSubmit(onNext)}>
+    <div>
       <section className="flex flex-col gap-2">
         <label htmlFor="title" id="title" className="text-xl font-semibold">
           Title
@@ -21,11 +21,11 @@ export const FormStepFirst = ({ onNext }: FormStepFirstProps) => {
         />
       </section>
       <button
-        type="submit"
+        onClick={onNext}
         className="border-2 w-1/2 mx-auto border-purple-500 rounded-lg py-2 px-4 text-slate-800 hover:scale-105 transition-all"
       >
         Next
       </button>
-    </form>
+    </div>
   );
 };

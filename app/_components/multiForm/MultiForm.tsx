@@ -21,9 +21,7 @@ export const MultiForm = () => {
         {state.matches("step2") && (
           <FormStepSecond onPrev={onPrev} onNext={onNext} />
         )}
-        {state.matches("step3") && (
-          <FormStepThird onPrev={onPrev} onSubmit={onSubmit} />
-        )}
+        {state.matches("step3") && <FormStepThird onPrev={onPrev} />}
         {state.matches("submitted") && <h2>Form Submitted Successfully! 🎉</h2>}
       </form>
     </FormProvider>

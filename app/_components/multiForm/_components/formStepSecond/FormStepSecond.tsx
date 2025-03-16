@@ -6,10 +6,10 @@ type FormStepSecondProps = {
 };
 
 export const FormStepSecond = ({ onPrev, onNext }: FormStepSecondProps) => {
-  const { register, handleSubmit } = useFormContext();
+  const { register } = useFormContext();
 
   return (
-    <form onSubmit={handleSubmit(onNext)}>
+    <div>
       <section className="flex flex-col gap-2">
         <label htmlFor="email" id="email">
           Email:
@@ -29,12 +29,13 @@ export const FormStepSecond = ({ onPrev, onNext }: FormStepSecondProps) => {
           Back
         </button>
         <button
-          type="submit"
+          type="button"
           className="border-2 w-1/2 mx-auto border-purple-500 rounded-lg py-2 px-4 text-slate-800 hover:scale-105 transition-all"
+          onClick={onNext}
         >
           Next
         </button>
       </section>
-    </form>
+    </div>
   );
 };
