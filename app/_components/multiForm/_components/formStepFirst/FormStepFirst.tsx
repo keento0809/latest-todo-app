@@ -1,21 +1,36 @@
 import { useFormContext } from "react-hook-form";
+import { MultiFormSchema } from "../../_hooks/useMultiForm";
 
 type FormStepFirstProps = {
   onNext: () => void;
 };
 
 export const FormStepFirst = ({ onNext }: FormStepFirstProps) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<MultiFormSchema>();
 
   return (
-    <div>
+    <div className="pt-10 flex flex-col gap-6">
       <section className="flex flex-col gap-2">
         <label htmlFor="title" id="title" className="text-xl font-semibold">
           Title
         </label>
+        {errors.title?.message && (
+          <span className="text-red-500 text-sm">
+            {errors.title?.message.toString()}
+          </span>
+        )}
         <input
           type="text"
-          {...register("title")}
+          {...register("title", {
+            required: "Title is required.",
+            minLength: {
+              value: 3,
+              message: "Title must be at least 3 characters long.",
+            },
+          })}
           id="title"
           className="rounded-lg outline-none border-2 border-slate-800 text-slate-800 py-2 pl-3"
         />
