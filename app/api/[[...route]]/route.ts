@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
-import todos from "@/app/_features/todos/server/route";
+import todos from "@/app/todos/_services/_server/route";
 
 export const runtime = "edge";
 
