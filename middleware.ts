@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 
 export default auth(async function middleware(request: NextRequest) {
-  // const session = await auth();
-  // const url = request.nextUrl.clone();
+  const session = await auth();
+  const url = request.nextUrl.clone();
 
-  // if (!session && url.pathname !== "/signin" && url.pathname !== "/signup") {
-  //   url.pathname = "/signin";
-  //   return NextResponse.redirect(new URL("/signin", request.url));
-  // }
+  if (!session && url.pathname !== "/signin" && url.pathname !== "/signup") {
+    url.pathname = "/signin";
+    return NextResponse.redirect(new URL("/signin", request.url));
+  }
 
   const requestHeaders = new Headers(request.headers);
   const { pathname, search } = request.nextUrl;
