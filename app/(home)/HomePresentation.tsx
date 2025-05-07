@@ -1,7 +1,9 @@
-import { TodoForm } from "./(home)/_components/todoForm/TodoForm";
-import { TodoList } from "./(home)/_components/todoList/TodoList";
-import { useHome } from "./(home)/_hooks/useHome";
-import { Todo } from "./(home)/_types/home";
+"use client";
+
+import { TodoForm } from "./_components/todoForm/TodoForm";
+import { TodoList } from "./_components/todoList/TodoList";
+import { useHome } from "./_hooks/useHome";
+import { Todo } from "./_types/home";
 
 type HomePresentationProps = {
   todos: Todo[];
