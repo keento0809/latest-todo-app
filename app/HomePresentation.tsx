@@ -1,19 +1,22 @@
-"use client";
-
 import { TodoForm } from "./_components/todoForm/TodoForm";
 import { TodoList } from "./_components/todoList/TodoList";
-import { useHome } from "./_hooks/useHome";
-import { Todo } from "./_types/home/home";
+import { TodoFields, TodoFormType, TodoObj } from "./_types/home/home";
 
-type HomeContainerProps = {
-  todos: Todo[];
+type HomePresentationProps = {
+  todoState: TodoObj;
+  setStateAction: (payload: FormData) => void;
+  isPending: boolean;
+  form: TodoFormType;
+  fields: TodoFields;
 };
 
-export const HomeContainer = ({ todos }: HomeContainerProps) => {
-  const { todoState, setStateAction, isPending, form, fields } = useHome({
-    todos,
-  });
-
+export const HomePresentation = ({
+  todoState,
+  setStateAction,
+  isPending,
+  form,
+  fields,
+}: HomePresentationProps) => {
   return (
     <div className="flex flex-col gap-16">
       <TodoForm
