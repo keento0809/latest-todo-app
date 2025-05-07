@@ -1,5 +1,5 @@
-import { TodoForm } from "./_components/todoForm/TodoForm";
-import { TodoList } from "./_components/todoList/TodoList";
+import { TodoForm } from "./(home)/_components/todoForm/TodoForm";
+import { TodoList } from "./(home)/_components/todoList/TodoList";
 import { TodoFields, TodoFormType, TodoObj } from "./_types/home/home";
 
 type HomePresentationProps = {

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { headers } from "next/headers";
-import { Footer } from "./_components/_common/footer/Footer";
-import { Header } from "./_components/_common/header/Header";
+import { Footer } from "./_components/_layouts/footer/Footer";
+import { Header } from "./_components/_layouts/header/Header";
 
 export const RootClient = async ({ children }: PropsWithChildren) => {
   const headersList = await headers();
