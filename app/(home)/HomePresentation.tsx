@@ -3,7 +3,7 @@
 import { TodoForm } from "./_components/todoForm/TodoForm";
 import { TodoList } from "./_components/todoList/TodoList";
 import { useHome } from "./_hooks/useHome";
-import { Todo } from "./_types/home";
+import { Todo } from "@/app/(home)/_types/home";
 
 type HomePresentationProps = {
   todos: Todo[];
