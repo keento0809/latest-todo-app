@@ -1,3 +1,4 @@
+import { BaseButton } from "../_common/baseButton/BaseButton";
 import { ErrorMessage } from "../_ui/messages/errorMessage/ErrorMessage";
 import { RadioGroup } from "../_ui/radioGroup/RadioGroup";
 import { TodoFields, TodoFormType } from "@/app/_types/home/home";
@@ -41,13 +42,9 @@ export const TodoForm = ({
         <RadioGroup fields={fields} />
         <ErrorMessage>{fields.isCompleted.errors}</ErrorMessage>
       </section>
-      <button
-        type="submit"
-        disabled={isPending}
-        className="border-2 w-1/2 mx-auto border-purple-500 rounded-lg py-2 px-4 text-slate-800 hover:scale-105 transition-all disabled:opacity-50"
-      >
+      <BaseButton type="submit" isPending={isPending}>
         Submit
-      </button>
+      </BaseButton>
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import { fetcher } from "@/app/_libs/fetcher";
 import { client } from "@/app/_libs/hono";
-import { formatISOToCustomString } from "@/app/_utils/utils";
 import { InferResponseType } from "hono";
+import { TodosIdContainer } from "./TodosIdContainer";
 
 export default async function Page({
   params,
@@ -23,14 +23,11 @@ export default async function Page({
     args: { next: { tags: [`todos/${id}`] } },
   });
 
-  return (
-    <div className="flex flex-col gap-4">
-      <p>{res.todo?.title}</p>
-      <p>
-        {res.todo?.updatedAt
-          ? formatISOToCustomString(res.todo?.updatedAt)
-          : ""}
-      </p>
-    </div>
-  );
+  const todoData = res.todo;
+
+  if (!todoData) {
+    return <div>Todo not found</div>;
+  }
+
+  return <TodosIdContainer todo={todoData} />;
 }

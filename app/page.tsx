@@ -1,5 +1,5 @@
 import { InferResponseType } from "hono";
-import { HomeContainer } from "./Home";
+import { HomeContainer } from "./HomeContainer";
 import { fetcher } from "./_libs/fetcher";
 import { client } from "./_libs/hono";
 

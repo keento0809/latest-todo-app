@@ -1,5 +1,5 @@
 import { TodoObj } from "@/app/_types/home/home";
-import { ListItem } from "../listItem/ListItem";
+import { ListItem } from "./_components/listItem/ListItem";
 import { LoadingSpinner } from "../_ui/loaders/loadingSpinner/LoadingSpinner";
 
 type TodoListProps = {

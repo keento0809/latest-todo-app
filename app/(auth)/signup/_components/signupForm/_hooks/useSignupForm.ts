@@ -1,4 +1,4 @@
-import { signup } from "@/app/_features/(auth)/signup/actions";
+import { signup } from "@/app/(auth)/signup/_actions/actions";
 import { signupSchema } from "@/app/_libs/zodSchema";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
