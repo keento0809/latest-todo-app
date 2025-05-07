@@ -2,7 +2,7 @@ import { useActionState } from "react";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { generateRandomDigits } from "@/app/_utils/utils";
-import { Todo, TodoObj } from "@/app/_types/home/home";
+import { Todo, TodoObj } from "@/app/(home)/_types/home";
 import { addTodo, deleteTodo, updateTodo } from "@/app/todos/_actions/actions";
 import { todoSchema } from "@/app/_libs/zodSchema";
 

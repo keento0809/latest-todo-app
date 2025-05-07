@@ -1,7 +1,7 @@
 import { PlusIcon } from "@/app/_components/_icons/plusIcon/PlusIcon";
 import { AlertDialog } from "@base-ui-components/react/alert-dialog";
 import { DeleteDialog } from "../../../_ui/dialogs/deleteDialog/DeleteDialog";
-import { Todo } from "@/app/_types/home/home";
+import { Todo } from "@/app/(home)/_types/home";
 import { EditableTitle } from "../../../_ui/titles/editableTitle/EditableTitle";
 
 type ListCardProps = {

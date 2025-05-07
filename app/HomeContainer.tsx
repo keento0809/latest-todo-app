@@ -1,6 +1,6 @@
 "use client";
 
-import { Todo } from "./_types/home/home";
+import { Todo } from "./(home)/_types/home";
 import { HomePresentation } from "./HomePresentation";
 
 type HomeContainerProps = {

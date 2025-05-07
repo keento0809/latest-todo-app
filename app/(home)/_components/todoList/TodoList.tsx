@@ -1,4 +1,4 @@
-import { TodoObj } from "@/app/_types/home/home";
+import { TodoObj } from "@/app/(home)/_types/home";
 import { ListItem } from "./_components/listItem/ListItem";
 import { LoadingSpinner } from "../_ui/loaders/loadingSpinner/LoadingSpinner";
 

@@ -1,4 +1,4 @@
-import { TodoFields } from "@/app/_types/home/home";
+import { TodoFields } from "@/app/(home)/_types/home";
 import { Radio } from "@base-ui-components/react/radio";
 import { RadioGroup as BaseRadioGroup } from "@base-ui-components/react/radio-group";
 import { useInputControl } from "@conform-to/react";

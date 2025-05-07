@@ -1,4 +1,4 @@
-import { Todo } from "@/app/_types/home/home";
+import { Todo } from "@/app/(home)/_types/home";
 
 export type TodoData = Todo & {
   createdAt: string;
