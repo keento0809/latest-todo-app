@@ -1,4 +1,4 @@
-import { Todo } from "@/app/_types/home/home";
+import { Todo } from "@/app/(home)/_types/home";
 import { AlertDialog } from "@base-ui-components/react/alert-dialog";
 
 type DeleteDialogProps = {

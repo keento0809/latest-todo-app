@@ -1,10 +1,10 @@
 import { useActionState } from "react";
-import { Todo, TodoObj } from "../_types/home/home";
-import { addTodo, deleteTodo, updateTodo } from "../todos/_actions/actions";
-import { generateRandomDigits } from "../_utils/utils";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { todoSchema } from "../_libs/zodSchema";
+import { generateRandomDigits } from "@/app/_utils/utils";
+import { Todo, TodoObj } from "@/app/(home)/_types/home";
+import { addTodo, deleteTodo, updateTodo } from "@/app/todos/_actions/actions";
+import { todoSchema } from "@/app/_libs/zodSchema";
 
 type UseHomeProps = {
   todos: Todo[];
