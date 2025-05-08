@@ -9,7 +9,9 @@ export const Header = () => {
       <div className="w-full flex justify-between">
         <Link href="/">LatestTodo</Link>
         <div>
-          <Link href="/signin">{isLoggedIn ? "Logout" : "Login"}</Link>
+          <Link href={isLoggedIn ? "/logout" : "/signin"}>
+            {isLoggedIn ? "Logout" : "Login"}
+          </Link>
         </div>
       </div>
     </div>
