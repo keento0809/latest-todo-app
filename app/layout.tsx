@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { RootClient } from "./rootClient";
+import { NextAuthProvider } from "./_providers/nextauthProvider/NextAuthProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <RootClient>{children}</RootClient>
+        <NextAuthProvider>
+          <RootClient>{children}</RootClient>
+        </NextAuthProvider>
       </body>
     </html>
   );
