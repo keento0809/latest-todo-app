@@ -1,5 +1,6 @@
 "use client";
 
+import { BaseButton } from "../../_common/baseButton/BaseButton";
 import { useFooter } from "./_hooks/useFooter";
 
 export const Footer = () => {
@@ -7,12 +8,7 @@ export const Footer = () => {
 
   return (
     <footer className="fixed bottom-0 py-12">
-      <button
-        onClick={handleNavigateToHome}
-        className="px-8 py-2 rounded-lg border border-purple-400 text-md"
-      >
-        Back
-      </button>
+      <BaseButton onClick={handleNavigateToHome}>Back</BaseButton>
     </footer>
   );
 };
