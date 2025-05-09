@@ -1,6 +1,21 @@
 import Link from "next/link";
 import { useHeader } from "./_hooks/useHeader";
 
+/**
+ * Header component that appears at the top of the application pages.
+ *
+ * This component provides the main navigation bar with the application title
+ * and authentication-related links. It uses the `useHeader` hook to determine
+ * the user's authentication state and display appropriate login/logout options.
+ *
+ * @example
+ * ```tsx
+ * <Header />
+ * ```
+ *
+ * @returns A header element containing the application title and authentication links
+ */
+
 export const Header = () => {
   const { isLoggedIn } = useHeader();
 

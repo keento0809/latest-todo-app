@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./Header";
-import { NextAuthProvider } from "@/app/_providers/nextauthProvider/NextAuthProvider";
+import { MockSessionProvider } from "./_mocks/mockSessionProvider/MockSessionProvider";
 
 const meta: Meta<typeof Header> = {
   title: "Common/Header",
   component: Header,
   tags: ["autodocs"],
   decorators: [
-    (Story) => (
-      <NextAuthProvider>
+    (Story, context) => (
+      <MockSessionProvider session={context.parameters.nextauth.session}>
         <Story />
-      </NextAuthProvider>
+      </MockSessionProvider>
     ),
   ],
 };
