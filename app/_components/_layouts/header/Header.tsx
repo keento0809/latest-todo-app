@@ -8,12 +8,15 @@ type HeaderProps = {
  * Header component that appears at the top of the application pages.
  *
  * This component provides the main navigation bar with the application title
- * and authentication-related links. It uses the `useHeader` hook to determine
- * the user's authentication state and display appropriate login/logout options.
+ * and authentication-related links. It displays different authentication options
+ * based on the user's login status provided through the `isLoggedIn` prop.
+ *
+ * @param {HeaderProps} props - Component props
+ * @param {boolean} props.isLoggedIn - Flag indicating whether the user is currently logged in
  *
  * @example
  * ```tsx
- * <Header />
+ * <Header isLoggedIn={true} />
  * ```
  *
  * @returns A header element containing the application title and authentication links
