@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest",
+    "test:run": "vitest run --config ./vitest.config.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",
@@ -17,6 +19,8 @@
     "@conform-to/zod": "^1.2.2",
     "@hono/zod-validator": "^0.4.2",
     "@neondatabase/serverless": "^0.10.4",
+    "@storybook/client-logger": "^8.6.12",
+    "@storybook/test-runner": "^0.22.0",
     "@storybook/testing-react": "^2.0.1",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@testing-library/jest-dom": "^6.6.3",
@@ -48,7 +52,6 @@
     "@storybook/addon-onboarding": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/experimental-addon-test": "^8.6.12",
-    "@storybook/experimental-nextjs-vite": "8.6.12",
     "@storybook/nextjs": "^8.6.12",
     "@storybook/react": "^8.6.12",
     "@storybook/test": "^8.6.12",

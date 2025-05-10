@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { useHeader } from "./_hooks/useHeader";
+
+type HeaderProps = {
+  isLoggedIn: boolean;
+};
 
 /**
  * Header component that appears at the top of the application pages.
@@ -16,9 +19,7 @@ import { useHeader } from "./_hooks/useHeader";
  * @returns A header element containing the application title and authentication links
  */
 
-export const Header = () => {
-  const { isLoggedIn } = useHeader();
-
+export const Header = ({ isLoggedIn }: HeaderProps) => {
   return (
     <div className="w-full py-4 px-4 lg:px-8 sticky top-0 left-0 border-b-2 border-purple-600">
       <div className="w-full flex justify-between">
