@@ -3,13 +3,13 @@ import { Footer } from "./Footer";
 import { action } from "@storybook/addon-actions";
 import { BaseButton } from "../../_common/baseButton/BaseButton";
 
-// Mock the useFooter hook
+// Mock handleNavigateToHome function
 const FooterWithMockHook = () => {
-  const mockNavigate = action("navigated to home");
+  const mockHandleNavigateToHome = action("handleNavigateToHome");
 
   return (
     <footer className="w-full max-w-[200px] mx-auto flex justify-center items-center py-12">
-      <BaseButton onClick={mockNavigate}>Back</BaseButton>
+      <BaseButton onClick={mockHandleNavigateToHome}>Back</BaseButton>
     </footer>
   );
 };
