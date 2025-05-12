@@ -3,7 +3,7 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { generateRandomDigits } from "@/app/_utils/utils";
 import { Todo, TodoObj } from "@/app/(home)/_types/home";
-import { addTodo, deleteTodo, updateTodo } from "@/app/todos/_actions/actions";
+import { addTodo, deleteTodo, updateTodo } from "@/app/(home)/_actions/actions";
 import { todoSchema } from "@/app/_libs/zodSchema";
 
 type UseHomeProps = {
