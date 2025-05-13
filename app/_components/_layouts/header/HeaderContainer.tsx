@@ -1,5 +1,5 @@
 import { useHeader } from "./_hooks/useHeader";
-import { Header } from "./Header";
+import { Header } from "./HeaderPresentation";
 
 export const HeaderContainer = () => {
   const { isLoggedIn } = useHeader();

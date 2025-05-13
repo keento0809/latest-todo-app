@@ -1,10 +1,27 @@
-import { composeStories } from "@storybook/react";
+import { composeStory } from "@storybook/react";
 import * as stories from "./Footer.stories";
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, it, expect, vi } from "vitest";
 
-const { Default } = composeStories(stories);
+// Mock Next.js router
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+    back: vi.fn(),
+    refresh: vi.fn(),
+  }),
+}));
 
-// vi.mock()
+const mockHandleNavigateToHome = vi.fn();
+const Default = composeStory(
+  {
+    args: {
+      handleClick: mockHandleNavigateToHome,
+    },
+  },
+  stories.default
+);
 
 describe("Footer", () => {
   it("renders the footer with a back button", async () => {
@@ -15,13 +32,14 @@ describe("Footer", () => {
     expect(backButton.closest("button")).toHaveAttribute("type", "button");
   });
 
-  it("navigates to the home page when the back button is clicked", async () => {
-    const backButton = screen.getByText("Back");
+  it("should call mockHandleNavigationToHome function when the back button is clicked", async () => {
+    // Arrange
+    await Default.run();
 
-    // Simulate a click on the back button
-    // await backButton.click();
+    // Act
+    await userEvent.click(screen.getByText("Back"));
 
-    // Check if the navigation function was called (you may need to adjust this based on your actual implementation)
-    expect(backButton).toHaveBeenCalled();
+    // Assert
+    expect(mockHandleNavigateToHome).toHaveBeenCalledTimes(1);
   });
 });

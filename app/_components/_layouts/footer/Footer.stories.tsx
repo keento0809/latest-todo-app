@@ -1,18 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Footer } from "./Footer";
-import { action } from "@storybook/addon-actions";
-import { BaseButton } from "../../_common/baseButton/BaseButton";
-
-// Mock handleNavigateToHome function
-const FooterWithMockHook = () => {
-  const mockHandleNavigateToHome = action("handleNavigateToHome");
-
-  return (
-    <footer className="w-full max-w-[200px] mx-auto flex justify-center items-center py-12">
-      <BaseButton onClick={mockHandleNavigateToHome}>Back</BaseButton>
-    </footer>
-  );
-};
+import { Footer } from "./FooterPresentation";
 
 const meta: Meta<typeof Footer> = {
   title: "Common/Footer",
@@ -23,6 +10,12 @@ const meta: Meta<typeof Footer> = {
     },
   },
   tags: ["autodocs"],
+  argTypes: {
+    handleClick: {
+      action: "clicked",
+      description: "Function to handle click event on the button.",
+    },
+  },
   decorators: [
     (Story) => (
       <div className="flex flex-col justify-end">
@@ -36,7 +29,7 @@ export default meta;
 type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {
-  render: () => <FooterWithMockHook />,
+  // render: () => <FooterWithMockHook />,
   parameters: {
     docs: {
       description: {
