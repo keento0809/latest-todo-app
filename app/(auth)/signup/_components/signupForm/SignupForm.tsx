@@ -3,9 +3,9 @@
 import { Field } from "@base-ui-components/react/field";
 import { Form } from "@base-ui-components/react/form";
 import { useSignupForm } from "./_hooks/useSignupForm";
-import { ErrorMessage } from "@/app/_components/_ui/messages/errorMessage/ErrorMessage";
+import { ErrorMessage } from "@/app/_components/_common/_ui/messages/errorMessage/ErrorMessage";
 import Link from "next/link";
-import { FormTitle } from "@/app/_components/_ui/titles/formTitle/FormTitle";
+import { FormTitle } from "@/app/_components/_common/_ui/titles/formTitle/FormTitle";
 
 export const SignupForm = () => {
   const { form, fields, isPending, action } = useSignupForm();

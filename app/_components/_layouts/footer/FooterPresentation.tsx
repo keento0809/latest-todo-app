@@ -1,4 +1,4 @@
-import { BaseButton } from "../../_common/baseButton/BaseButton";
+import { BaseButton } from "../../_common/_ui/buttons/baseButton/BaseButton";
 
 type FooterPresentationProps = {
   handleClick: () => void;

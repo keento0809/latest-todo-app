@@ -1,13 +1,13 @@
 "use client";
 
-import { ErrorMessage } from "@/app/_components/_ui/messages/errorMessage/ErrorMessage";
+import { ErrorMessage } from "@/app/_components/_common/_ui/messages/errorMessage/ErrorMessage";
 import { Field, Form } from "@base-ui-components/react";
 import Link from "next/link";
 import { useSigninForm } from "../../_hooks/useSigninForm";
 import { IconBrandGithub } from "justd-icons";
 import { useTransition } from "react";
 import { signIn } from "next-auth/react";
-import { FormTitle } from "@/app/_components/_ui/titles/formTitle/FormTitle";
+import { FormTitle } from "@/app/_components/_common/_ui/titles/formTitle/FormTitle";
 
 export const SigninForm = () => {
   const { form, fields, action, isPending } = useSigninForm();
