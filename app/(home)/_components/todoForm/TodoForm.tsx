@@ -1,6 +1,6 @@
 import { BaseButton } from "@/app/_components/_common/_ui/buttons/baseButton/BaseButton";
 import { ErrorMessage } from "@/app/_components/_common/_ui/messages/errorMessage/ErrorMessage";
-import { RadioGroup } from "@/app/_components/_common/_ui/radioGroup/RadioGroup";
+import { RadioGroup } from "@/app/_components/_common/_ui/radioGroups/radioGroup/RadioGroup";
 import { TodoFields, TodoFormType } from "@/app/(home)/_types/home";
 
 type TodoFormProps = {
