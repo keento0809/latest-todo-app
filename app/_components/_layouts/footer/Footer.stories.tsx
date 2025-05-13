@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Footer } from "./FooterPresentation";
+import { Footer } from "./Footer";
 
 const meta: Meta<typeof Footer> = {
   title: "Common/Footer",
@@ -29,12 +29,16 @@ export default meta;
 type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {
-  // render: () => <FooterWithMockHook />,
   parameters: {
     docs: {
       description: {
         story: "Standard footer as shown on main pages.",
       },
+    },
+  },
+  args: {
+    handleClick: () => {
+      console.log("Back button clicked");
     },
   },
 };
