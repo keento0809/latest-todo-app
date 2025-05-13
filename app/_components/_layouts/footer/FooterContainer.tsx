@@ -1,3 +1,5 @@
+"use client";
+
 import { useFooter } from "./_hooks/useFooter";
 import { FooterPresentation } from "./FooterPresentation";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import { BaseButton } from "../../_common/baseButton/BaseButton";
 
 type FooterPresentationProps = {

@@ -1,8 +1,10 @@
+"use client";
+
 import { useHeader } from "./_hooks/useHeader";
-import { Header } from "./HeaderPresentation";
+import { HeaderPresentation } from "./HeaderPresentation";
 
 export const HeaderContainer = () => {
   const { isLoggedIn } = useHeader();
 
-  return <Header isLoggedIn={isLoggedIn} />;
+  return <HeaderPresentation isLoggedIn={isLoggedIn} />;
 };
