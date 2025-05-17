@@ -40,7 +40,7 @@ globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   unobserve: vi.fn(),
 })) as unknown as typeof ResizeObserver;
 
-globalThis.scrollTo = vi.fn(() => null);
+// globalThis.scrollTo = vi.fn(() => null);
 
 // Storybook annotations
 // const annotations = setProjectAnnotations([previewAnnotations]);
