@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
-    setupFiles: [".storybook/vitest.setup.ts"],
+    setupFiles: ["./vitest.setup.tsx"],
   },
 });
