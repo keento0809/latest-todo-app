@@ -12,6 +12,6 @@ type Story = StoryObj<typeof FormTitle>;
 
 export const Default: Story = {
   args: {
-    children: "FormTitle",
+    children: "Login to Your Account",
   },
 };
