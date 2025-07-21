@@ -24,15 +24,23 @@ type HeaderPresentationProps = {
 
 export const HeaderPresentation = ({ isLoggedIn }: HeaderPresentationProps) => {
   return (
-    <div className="w-full py-4 px-4 lg:px-8 sticky top-0 left-0 border-b-2 border-purple-600">
-      <div className="w-full flex justify-between">
-        <Link href="/">LatestTodo</Link>
-        <div>
-          <Link href={isLoggedIn ? "/logout" : "/signin"}>
+    <header className="w-full py-4 px-4 lg:px-8 sticky top-0 left-0 z-50 bg-white/80 backdrop-blur-lg border-b border-neutral-200/50 shadow-soft">
+      <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
+        <Link 
+          href="/" 
+          className="text-2xl font-bold text-gradient hover:scale-105 transition-transform duration-200"
+        >
+          LatestTodo
+        </Link>
+        <nav>
+          <Link 
+            href={isLoggedIn ? "/logout" : "/signin"}
+            className="btn-secondary text-sm"
+          >
             {isLoggedIn ? "Logout" : "Login"}
           </Link>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };

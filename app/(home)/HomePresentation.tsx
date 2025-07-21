@@ -20,13 +20,23 @@ export const HomePresentation = ({
   fields,
 }: HomePresentationProps) => {
   return (
-    <div className="flex flex-col gap-16">
+    <div className="w-full space-y-12">
+      <div className="text-center space-y-4 mb-12">
+        <h1 className="text-4xl lg:text-6xl font-bold text-gradient">
+          LatestTodo
+        </h1>
+        <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          Organize your tasks beautifully and boost your productivity with our modern todo application.
+        </p>
+      </div>
+      
       <TodoForm
         action={setStateAction}
         isPending={isPending}
         form={form}
         fields={fields}
       />
+      
       <TodoList
         todoState={todoState}
         action={setStateAction}

@@ -1,10 +1,9 @@
-import { composeStory } from "@storybook/react";
-import * as stories from "./Footer.stories";
+import { describe, it, expect, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi } from "vitest";
+import * as stories from "./Footer.stories";
+import { createStoryFromArgs, runStoryAndTest, expectElementWithText } from "../../_test-utils/testHelpers";
 
-// Mock Next.js router
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: vi.fn(),
@@ -14,32 +13,20 @@ vi.mock("next/navigation", () => ({
 }));
 
 const mockHandleNavigateToHome = vi.fn();
-const Default = composeStory(
-  {
-    args: {
-      handleClick: mockHandleNavigateToHome,
-    },
-  },
-  stories.default
-);
+const Default = createStoryFromArgs({ handleClick: mockHandleNavigateToHome }, stories);
 
 describe("Footer", () => {
-  it("renders the footer with a back button", async () => {
-    await Default.run();
+  it("renders the footer with a back button", () => 
+    runStoryAndTest(Default, () => {
+      expectElementWithText("Back to Home").toBeInDocument();
+      expectElementWithText("Back to Home").toHaveAttribute("type", "button");
+    })
+  );
 
-    const backButton = screen.getByText("Back");
-    expect(backButton).toBeInTheDocument();
-    expect(backButton.closest("button")).toHaveAttribute("type", "button");
-  });
-
-  it("should call mockHandleNavigationToHome function when the back button is clicked", async () => {
-    // Arrange
-    await Default.run();
-
-    // Act
-    await userEvent.click(screen.getByText("Back"));
-
-    // Assert
-    expect(mockHandleNavigateToHome).toHaveBeenCalledTimes(1);
-  });
+  it("should call mockHandleNavigationToHome function when the back button is clicked", () => 
+    runStoryAndTest(Default, async () => {
+      await userEvent.click(screen.getByText("Back to Home"));
+      expect(mockHandleNavigateToHome).toHaveBeenCalledTimes(1);
+    })
+  );
 });

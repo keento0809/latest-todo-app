@@ -1,3 +1,5 @@
+"use client";
+
 import { useHome } from "./_hooks/useHome";
 import { Todo } from "./_types/home";
 import { HomePresentation, HomePresentationProps } from "./HomePresentation";
