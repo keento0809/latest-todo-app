@@ -3,7 +3,7 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { generateRandomDigits } from "@/app/_utils/utils";
 import { Todo, TodoObj } from "@/app/(home)/_types/home";
-import { addTodo, deleteTodo, updateTodo } from "@/app/(home)/_actions/actions";
+import { addTodo, deleteTodo, updateTodo, toggleTodo } from "@/app/(home)/_actions/actions";
 import { todoSchema } from "@/app/_libs/zodSchema";
 
 type UseHomeProps = {
@@ -58,6 +58,24 @@ export const useHome = ({ todos }: UseHomeProps) => {
 
           return {
             todos: prevState.todos.filter((todo) => todo.id !== deleteTodoId),
+          };
+        }
+        case "TOGGLE": {
+          const toggleTodoId = Number(formData.get("todoId")) as number;
+
+          await toggleTodo({ id: toggleTodoId });
+
+          return {
+            todos: prevState.todos.map((todo) => {
+              if (todo.id === toggleTodoId) {
+                const currentIsCompleted = todo.isCompleted === "true" || todo.isCompleted === true;
+                return {
+                  ...todo,
+                  isCompleted: !currentIsCompleted,
+                };
+              }
+              return todo;
+            }),
           };
         }
         default: {

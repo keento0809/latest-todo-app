@@ -2,8 +2,8 @@ import { composeStory } from "@storybook/react";
 import { screen } from "@testing-library/react";
 import { expect } from "vitest";
 
-export const createStoryFromArgs = (args: Record<string, unknown>, stories: { default: unknown }) => 
-  composeStory({ args }, stories.default);
+export const createStoryFromArgs = (args: Record<string, unknown>, stories: { default: Record<string, unknown> }) => 
+  composeStory({ args }, stories.default as Record<string, unknown>);
 
 export const expectElementWithText = (text: string) => {
   const element = screen.getByText(text);
