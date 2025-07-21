@@ -1,3 +1,4 @@
+import { startTransition } from "react";
 import { PlusIcon } from "@/app/_components/_icons/plusIcon/PlusIcon";
 import { AlertDialog } from "@base-ui-components/react/alert-dialog";
 import { Todo } from "@/app/(home)/_types/home";
@@ -13,10 +14,12 @@ export const ListItem = ({ todo, action }: ListCardProps) => {
   const isCompleted = todo.isCompleted === "true" || todo.isCompleted === true;
   
   const handleToggleComplete = () => {
-    const formData = new FormData();
-    formData.append('actionType', 'TOGGLE');
-    formData.append('todoId', todo.id.toString());
-    action(formData);
+    startTransition(() => {
+      const formData = new FormData();
+      formData.append('actionType', 'TOGGLE');
+      formData.append('todoId', todo.id.toString());
+      action(formData);
+    });
   };
   
   return (
