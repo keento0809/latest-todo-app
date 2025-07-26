@@ -5,6 +5,7 @@ import { generateRandomDigits } from "@/app/_utils/utils";
 import { Todo, TodoObj } from "@/app/(home)/_types/home";
 import { addTodo, deleteTodo, updateTodo, toggleTodo } from "@/app/(home)/_actions/actions";
 import { todoSchema } from "@/app/_libs/zodSchema";
+import { isCompleted } from "@/app/(home)/_utils/todoHelpers";
 
 type UseHomeProps = {
   todos: Todo[];
@@ -31,7 +32,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
         case "UPDATE": {
           const updateTodoId = Number(formData.get("todoId")) as number;
           const updateTodoTitle = formData.get("title") as string;
-          const updateTodoIsCompleted = formData.get("isCompleted") === "true";
+          const updateTodoIsCompleted = isCompleted(formData.get("isCompleted") as "true" | "false");
 
           await updateTodo({
             id: updateTodoId,
@@ -69,7 +70,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
           return {
             todos: prevState.todos.map((todo) => {
               if (todo.id === toggleTodoId) {
-                const currentIsCompleted = todo.isCompleted === "true" || todo.isCompleted === true;
+                const currentIsCompleted = isCompleted(todo.isCompleted);
                 return {
                   ...todo,
                   isCompleted: !currentIsCompleted,

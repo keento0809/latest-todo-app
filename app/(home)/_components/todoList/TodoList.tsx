@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { TodoObj } from "@/app/(home)/_types/home";
 import { ListItem } from "./_components/listItem/ListItem";
 import { LoadingSpinner } from "@/app/_components/_common/_ui/loaders/loadingSpinner/LoadingSpinner";
+import { isCompleted } from "@/app/(home)/_utils/todoHelpers";
 
 type TodoListProps = {
   todoState: TodoObj;
@@ -11,8 +12,8 @@ type TodoListProps = {
 
 export const TodoList = ({ todoState, action, isPending }: TodoListProps) => {
   const { completedTodos, pendingTodos } = useMemo(() => {
-    const completed = todoState.todos.filter(todo => todo.isCompleted);
-    const pending = todoState.todos.filter(todo => !todo.isCompleted);
+    const completed = todoState.todos.filter(todo => isCompleted(todo.isCompleted));
+    const pending = todoState.todos.filter(todo => !isCompleted(todo.isCompleted));
     return { completedTodos: completed, pendingTodos: pending };
   }, [todoState.todos]);
 

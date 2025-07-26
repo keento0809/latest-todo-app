@@ -3,7 +3,7 @@ import { FieldMetadata, FormMetadata } from "@conform-to/react";
 export type Todo = {
   id: number;
   title: string;
-  isCompleted: boolean;
+  isCompleted: boolean | "true" | "false";
 };
 
 export type TodoObj = {
@@ -20,7 +20,7 @@ export type TodoFormType = FormMetadata<
 
 export type TodoFields = Required<{
   isCompleted: FieldMetadata<
-    boolean,
+    boolean | "true" | "false",
     {
       isCompleted: "true" | "false";
       title: string;
