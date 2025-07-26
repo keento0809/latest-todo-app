@@ -23,11 +23,20 @@ export const useHome = ({ todos }: UseHomeProps) => {
             isCompleted: formData.get("isCompleted") as "true" | "false",
           };
 
-          await addTodo({ formData });
-
-          return {
+          // Optimistic update: Update UI immediately
+          const optimisticState = {
             todos: [...prevState.todos, newTodo],
           };
+
+          // Start server action in background (don't await)
+          addTodo({ 
+            formData,
+            optimisticId: newTodo.id 
+          }).catch((error) => {
+            console.error('Failed to add todo:', error);
+          });
+
+          return optimisticState;
         }
         case "UPDATE": {
           const updateTodoId = Number(formData.get("todoId")) as number;
