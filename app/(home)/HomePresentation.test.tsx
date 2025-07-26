@@ -5,10 +5,23 @@ import { HomePresentation, HomePresentationProps } from "./HomePresentation";
 import { TodoObj, TodoFormType, TodoFields } from "@/app/(home)/_types/home";
 
 // Mock child components
+interface TodoFormProps {
+  action: (payload: FormData) => void;
+  isPending: boolean;
+  form: TodoFormType;
+  fields: TodoFields;
+}
+
+interface TodoListProps {
+  todoState: TodoObj;
+  action: (payload: FormData) => void;
+  isPending: boolean;
+}
+
 vi.mock("./_components/todoForm/TodoForm", () => ({
-  TodoForm: ({ action, isPending, form, fields }: any) => (
+  TodoForm: ({ action, isPending, form, fields }: TodoFormProps) => (
     <div data-testid="todo-form">
-      <div data-testid="form-action">{action ? "has-action" : "no-action"}</div>
+      <div data-testid="form-action">{typeof action === "function" ? "has-action" : "no-action"}</div>
       <div data-testid="form-pending">{isPending ? "pending" : "not-pending"}</div>
       <div data-testid="form-form">{form ? "has-form" : "no-form"}</div>
       <div data-testid="form-fields">{fields ? "has-fields" : "no-fields"}</div>
@@ -17,10 +30,10 @@ vi.mock("./_components/todoForm/TodoForm", () => ({
 }));
 
 vi.mock("./_components/todoList/TodoList", () => ({
-  TodoList: ({ todoState, action, isPending }: any) => (
+  TodoList: ({ todoState, action, isPending }: TodoListProps) => (
     <div data-testid="todo-list">
       <div data-testid="list-state">{todoState ? "has-state" : "no-state"}</div>
-      <div data-testid="list-action">{action ? "has-action" : "no-action"}</div>
+      <div data-testid="list-action">{typeof action === "function" ? "has-action" : "no-action"}</div>
       <div data-testid="list-pending">{isPending ? "pending" : "not-pending"}</div>
     </div>
   ),
@@ -34,7 +47,6 @@ describe("HomePresentation", () => {
   const baseTodoState: TodoObj = {
     todos: [],
     error: null,
-    isLoading: false,
   };
 
   const baseProps: HomePresentationProps = {
@@ -211,14 +223,14 @@ describe("HomePresentation", () => {
     });
 
     it("should render TodoForm in first grid item with correct order", () => {
-      const { container } = render(<HomePresentation {...baseProps} />);
+      render(<HomePresentation {...baseProps} />);
 
       const formContainer = screen.getByTestId("todo-form").closest("div");
       expect(formContainer).toHaveClass("order-2", "lg:order-1");
     });
 
     it("should render TodoList in second grid item with correct order", () => {
-      const { container } = render(<HomePresentation {...baseProps} />);
+      render(<HomePresentation {...baseProps} />);
 
       const listContainer = screen.getByTestId("todo-list").closest("div");
       expect(listContainer).toHaveClass("order-1", "lg:order-2");
@@ -260,7 +272,7 @@ describe("HomePresentation", () => {
         ...baseProps,
         todoState: {
           ...baseTodoState,
-          todos: [{ id: 1, title: "Test todo", isCompleted: false }],
+          todos: [{ id: 1, title: "Test todo", isCompleted: false as const }],
         },
       };
 
@@ -351,14 +363,14 @@ describe("HomePresentation", () => {
     });
 
     it("should have responsive order classes for form", () => {
-      const { container } = render(<HomePresentation {...baseProps} />);
+      render(<HomePresentation {...baseProps} />);
 
       const formContainer = screen.getByTestId("todo-form").closest("div");
       expect(formContainer).toHaveClass("order-2", "lg:order-1");
     });
 
     it("should have responsive order classes for list", () => {
-      const { container } = render(<HomePresentation {...baseProps} />);
+      render(<HomePresentation {...baseProps} />);
 
       const listContainer = screen.getByTestId("todo-list").closest("div");
       expect(listContainer).toHaveClass("order-1", "lg:order-2");
@@ -405,8 +417,8 @@ describe("HomePresentation", () => {
     it("should handle null props gracefully", () => {
       const propsWithNulls = {
         ...baseProps,
-        form: null as any,
-        fields: null as any,
+        form: null as unknown as TodoFormType,
+        fields: null as unknown as TodoFields,
       };
 
       expect(() => render(<HomePresentation {...propsWithNulls} />)).not.toThrow();

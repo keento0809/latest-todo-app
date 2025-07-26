@@ -30,10 +30,10 @@ describe("TodoList", () => {
   });
 
   const mockTodos = [
-    { id: 1, title: "Pending Task 1", isCompleted: false },
-    { id: 2, title: "Pending Task 2", isCompleted: "false" },
-    { id: 3, title: "Completed Task 1", isCompleted: true },
-    { id: 4, title: "Completed Task 2", isCompleted: "true" },
+    { id: 1, title: "Pending Task 1", isCompleted: false as const },
+    { id: 2, title: "Pending Task 2", isCompleted: "false" as const },
+    { id: 3, title: "Completed Task 1", isCompleted: true as const },
+    { id: 4, title: "Completed Task 2", isCompleted: "true" as const },
   ];
 
   beforeEach(() => {

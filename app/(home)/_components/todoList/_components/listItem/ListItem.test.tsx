@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ListItem } from "./ListItem";
 import { Todo } from "@/app/(home)/_types/home";
@@ -58,13 +58,13 @@ describe("ListItem", () => {
   const pendingTodo: Todo = {
     id: 1,
     title: "Test Pending Todo",
-    isCompleted: false,
+    isCompleted: false as const,
   };
 
   const completedTodo: Todo = {
     id: 2,
     title: "Test Completed Todo", 
-    isCompleted: true,
+    isCompleted: true as const,
   };
 
   beforeEach(() => {

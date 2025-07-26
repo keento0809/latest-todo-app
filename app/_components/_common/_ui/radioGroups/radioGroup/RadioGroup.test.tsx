@@ -58,16 +58,34 @@ vi.mock("@conform-to/react", () => ({
 }));
 
 describe("RadioGroup", () => {
-  const mockFields: TodoFields = {
+  const mockFields = {
     isCompleted: {
       key: "isCompleted-key",
       name: "isCompleted",
+      id: "isCompleted-id",
+      errorId: "isCompleted-errorId",
+      descriptionId: "isCompleted-descriptionId",
+      formId: "test-form-id",
       errors: undefined,
+      initialValue: undefined,
+      value: undefined,
+      dirty: false,
+      valid: true,
+      allErrors: {},
     },
     title: {
       key: "title-key",
-      name: "title", 
+      name: "title",
+      id: "title-id",
+      errorId: "title-errorId", 
+      descriptionId: "title-descriptionId",
+      formId: "test-form-id",
       errors: undefined,
+      initialValue: undefined,
+      value: undefined,
+      dirty: false,
+      valid: true,
+      allErrors: {},
     },
   } as TodoFields;
 

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TodoForm } from "./TodoForm";
 import { TodoFields, TodoFormType } from "@/app/(home)/_types/home";
@@ -58,17 +58,35 @@ describe("TodoForm", () => {
     form: {
       id: "test-form",
       onSubmit: mockOnSubmit,
-    } as TodoFormType,
+    } as unknown as TodoFormType,
     fields: {
       title: {
         key: "title-key",
         name: "title",
+        id: "title-id",
+        errorId: "title-errorId",
+        descriptionId: "title-descriptionId",
+        formId: "test-form-id",
         errors: undefined,
+        initialValue: undefined,
+        value: undefined,
+        dirty: false,
+        valid: true,
+        allErrors: {},
       },
       isCompleted: {
         key: "isCompleted-key", 
         name: "isCompleted",
+        id: "isCompleted-id",
+        errorId: "isCompleted-errorId",
+        descriptionId: "isCompleted-descriptionId",
+        formId: "test-form-id",
         errors: undefined,
+        initialValue: undefined,
+        value: undefined,
+        dirty: false,
+        valid: true,
+        allErrors: {},
       },
     } as TodoFields,
   };
@@ -151,7 +169,7 @@ describe("TodoForm", () => {
       await user.type(titleInput, longText);
       
       // Browser should enforce maxLength
-      expect(titleInput.value.length).toBeLessThanOrEqual(200);
+      expect((titleInput as HTMLInputElement).value.length).toBeLessThanOrEqual(200);
     });
   });
 
