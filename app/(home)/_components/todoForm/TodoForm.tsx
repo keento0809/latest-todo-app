@@ -44,15 +44,18 @@ export const TodoForm = ({
               id="title"
               placeholder="What needs to be done?"
               className="input-field"
+              required
+              maxLength={200}
+              aria-describedby={fields.title.errors ? "title-error" : undefined}
             />
             <ErrorMessage>{fields.title.errors}</ErrorMessage>
           </div>
           
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-neutral-700">Status</h3>
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-semibold text-neutral-700">Status</legend>
             <RadioGroup fields={fields} />
             <ErrorMessage>{fields.isCompleted.errors}</ErrorMessage>
-          </div>
+          </fieldset>
           
           <BaseButton type="submit" isPending={isPending}>
             <span className="flex items-center gap-2">

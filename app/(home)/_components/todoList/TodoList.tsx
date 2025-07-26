@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { TodoObj } from "@/app/(home)/_types/home";
 import { ListItem } from "./_components/listItem/ListItem";
 import { LoadingSpinner } from "@/app/_components/_common/_ui/loaders/loadingSpinner/LoadingSpinner";
@@ -9,8 +10,11 @@ type TodoListProps = {
 };
 
 export const TodoList = ({ todoState, action, isPending }: TodoListProps) => {
-  const completedTodos = todoState.todos.filter(todo => todo.isCompleted);
-  const pendingTodos = todoState.todos.filter(todo => !todo.isCompleted);
+  const { completedTodos, pendingTodos } = useMemo(() => {
+    const completed = todoState.todos.filter(todo => todo.isCompleted);
+    const pending = todoState.todos.filter(todo => !todo.isCompleted);
+    return { completedTodos: completed, pendingTodos: pending };
+  }, [todoState.todos]);
 
   if (isPending) {
     return (
@@ -46,9 +50,9 @@ export const TodoList = ({ todoState, action, isPending }: TodoListProps) => {
               {pendingTodos.length}
             </span>
           </div>
-          <div className="grid gap-3">
+          <div className="grid gap-3" role="list" aria-label="Pending tasks">
             {pendingTodos.map((todo, index) => (
-              <div key={todo.id} className="animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div key={todo.id} className="animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }} role="listitem">
                 <ListItem todo={todo} action={action} />
               </div>
             ))}
@@ -66,9 +70,9 @@ export const TodoList = ({ todoState, action, isPending }: TodoListProps) => {
               {completedTodos.length}
             </span>
           </div>
-          <div className="grid gap-3">
+          <div className="grid gap-3" role="list" aria-label="Completed tasks">
             {completedTodos.map((todo, index) => (
-              <div key={todo.id} className="animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div key={todo.id} className="animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }} role="listitem">
                 <ListItem todo={todo} action={action} />
               </div>
             ))}

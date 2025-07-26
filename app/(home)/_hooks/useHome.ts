@@ -13,7 +13,8 @@ type UseHomeProps = {
 export const useHome = ({ todos }: UseHomeProps) => {
   const [todoState, setStateAction, isPending] = useActionState(
     async (prevState: TodoObj, formData: FormData) => {
-      switch (formData.get("actionType")) {
+      try {
+        switch (formData.get("actionType")) {
         case "ADD": {
           const newTodo: Todo = {
             id: generateRandomDigits(),
@@ -81,6 +82,10 @@ export const useHome = ({ todos }: UseHomeProps) => {
         default: {
           return prevState;
         }
+        }
+      } catch (error) {
+        console.error('Error handling todo action:', error);
+        return prevState;
       }
     },
     { todos }
