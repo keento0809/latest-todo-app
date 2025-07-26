@@ -8,6 +8,7 @@ export type Todo = {
 
 export type TodoObj = {
   todos: Todo[];
+  error?: string | null;
 };
 
 export type TodoFormType = FormMetadata<

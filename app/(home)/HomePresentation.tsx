@@ -30,6 +30,25 @@ export const HomePresentation = ({
         </p>
       </div>
       
+      {todoState.error && (
+        <div className="max-w-2xl mx-auto mb-6">
+          <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-lg flex items-center justify-between">
+            <span>{todoState.error}</span>
+            <button
+              onClick={() => {
+                const formData = new FormData();
+                formData.append('actionType', 'CLEAR_ERROR');
+                setStateAction(formData);
+              }}
+              className="text-error-500 hover:text-error-700 ml-4"
+              aria-label="Dismiss error"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="order-2 lg:order-1">
           <TodoForm

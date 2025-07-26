@@ -1,7 +1,8 @@
 export function generateRandomDigits() {
-  return Number(
-    Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join("")
-  );
+  // Use timestamp + random for better uniqueness and collision avoidance
+  const timestamp = Date.now();
+  const random = Math.floor(Math.random() * 10000);
+  return Number(`${timestamp % 100000}${random.toString().padStart(4, '0')}`);
 }
 
 export function formatISOToCustomString(isoDateString: string): string {

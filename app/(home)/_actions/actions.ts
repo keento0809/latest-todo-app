@@ -7,28 +7,43 @@ import { todo } from "@/app/_db/schema";
 import { parseWithZod } from "@conform-to/zod";
 import { todoSchema } from "@/app/_libs/zodSchema";
 
-export const addTodo = async ({ formData }: { formData: FormData }) => {
-  const submission = parseWithZod(formData, { schema: todoSchema });
+export const addTodo = async ({ 
+  formData, 
+  optimisticId 
+}: { 
+  formData: FormData;
+  optimisticId?: number;
+}) => {
+  try {
+    const submission = parseWithZod(formData, { schema: todoSchema });
 
-  if (submission.status !== "success") {
-    return submission.reply();
+    if (submission.status !== "success") {
+      return { error: "Invalid form data. Please check your input." };
+    }
+
+    const id = optimisticId || Math.floor(Math.random() * 100000);
+    const title = submission.value.title;
+    const isCompleted = submission.value.isCompleted === "true";
+
+    await db.insert(todo).values({
+      id,
+      title,
+      isCompleted,
+    });
+    
+    // Only revalidate specific path instead of full page
+    revalidatePath("/", "page");
+    
+    return { success: true };
+  } catch (error) {
+    console.error('Database error adding todo:', error);
+    return { error: "Failed to add todo. Please try again." };
   }
-
-  const id = Math.floor(Math.random() * 100000);
-  const title = submission.value.title;
-  const isCompleted = submission.value.isCompleted === "true";
-
-  await db.insert(todo).values({
-    id,
-    title,
-    isCompleted,
-  });
-  revalidatePath("/");
 };
 
 export const deleteTodo = async ({ id }: { id: number }) => {
   await db.delete(todo).where(eq(todo.id, id));
-  revalidatePath("/");
+  revalidatePath("/", "page");
 };
 
 export const toggleTodo = async ({ id }: { id: number }) => {
@@ -38,7 +53,7 @@ export const toggleTodo = async ({ id }: { id: number }) => {
       isCompleted: not(todo.isCompleted),
     })
     .where(eq(todo.id, id));
-  revalidatePath("/");
+  revalidatePath("/", "page");
 };
 
 export const updateTodo = async ({
@@ -57,5 +72,5 @@ export const updateTodo = async ({
       isCompleted: isCompleted,
     })
     .where(eq(todo.id, id));
-  revalidatePath("/");
+  revalidatePath("/", "page");
 };

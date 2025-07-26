@@ -23,10 +23,24 @@ export const useHome = ({ todos }: UseHomeProps) => {
             isCompleted: formData.get("isCompleted") as "true" | "false",
           };
 
-          await addTodo({ formData });
+          // Call server action and handle response
+          const result = await addTodo({ 
+            formData,
+            optimisticId: newTodo.id 
+          });
 
+          // If server action returned error, return it in state
+          if (result && result.error) {
+            return {
+              ...prevState,
+              error: result.error
+            };
+          }
+
+          // Success: add todo to state
           return {
             todos: [...prevState.todos, newTodo],
+            error: null
           };
         }
         case "UPDATE": {
@@ -80,6 +94,12 @@ export const useHome = ({ todos }: UseHomeProps) => {
             }),
           };
         }
+        case "CLEAR_ERROR": {
+          return {
+            ...prevState,
+            error: null
+          };
+        }
         default: {
           return prevState;
         }
@@ -89,7 +109,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
         return prevState;
       }
     },
-    { todos }
+    { todos, error: null }
   );
 
   const [form, fields] = useForm({
