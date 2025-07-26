@@ -15,28 +15,30 @@ export const RadioGroup = ({ fields }: RadioGroupProps) => {
       key={fields.isCompleted.key}
       name={fields.isCompleted.name}
       onValueChange={(value) => control.change(value as string)}
-      className="flex items-start gap-8 text-gray-900"
+      className="flex items-center gap-6"
     >
-      <div className="font-medium" id="apples-caption">
-        Completed?
-      </div>
-      <label className="flex items-center gap-2">
-        <Radio.Root
-          value="true"
-          className="flex size-5 items-center justify-center rounded-full outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 data-[checked]:bg-gray-900 data-[unchecked]:border data-[unchecked]:border-gray-300"
-        >
-          <Radio.Indicator className="flex before:size-2 before:rounded-full before:bg-gray-50 data-[unchecked]:hidden cursor-pointer" />
-        </Radio.Root>
-        Yes
-      </label>
-      <label className="flex items-center gap-2">
+      <label className="flex items-center gap-3 cursor-pointer group">
         <Radio.Root
           value="false"
-          className="flex size-5 items-center justify-center rounded-full outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-800 data-[checked]:bg-gray-900 data-[unchecked]:border data-[unchecked]:border-gray-300"
+          className="flex w-5 h-5 items-center justify-center rounded-full border-2 border-neutral-300 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[checked]:bg-primary-500 data-[checked]:border-primary-500 transition-all duration-200 group-hover:border-primary-400"
         >
-          <Radio.Indicator className="flex before:size-2 before:rounded-full before:bg-gray-50 data-[unchecked]:hidden cursor-pointer" />
+          <Radio.Indicator className="flex before:w-2 before:h-2 before:rounded-full before:bg-white data-[unchecked]:hidden" />
         </Radio.Root>
-        No
+        <span className="text-sm font-medium text-neutral-700 group-hover:text-neutral-900 transition-colors duration-200">
+          Pending
+        </span>
+      </label>
+      
+      <label className="flex items-center gap-3 cursor-pointer group">
+        <Radio.Root
+          value="true"
+          className="flex w-5 h-5 items-center justify-center rounded-full border-2 border-neutral-300 outline-none focus-visible:ring-2 focus-visible:ring-success-500 focus-visible:ring-offset-2 data-[checked]:bg-success-500 data-[checked]:border-success-500 transition-all duration-200 group-hover:border-success-400"
+        >
+          <Radio.Indicator className="flex before:w-2 before:h-2 before:rounded-full before:bg-white data-[unchecked]:hidden" />
+        </Radio.Root>
+        <span className="text-sm font-medium text-neutral-700 group-hover:text-neutral-900 transition-colors duration-200">
+          Completed
+        </span>
       </label>
     </BaseRadioGroup>
   );

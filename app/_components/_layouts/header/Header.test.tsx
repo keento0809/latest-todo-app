@@ -1,34 +1,27 @@
-import { describe, it, expect, vi } from "vitest";
-import { screen } from "@testing-library/react";
+import React from "react";
+import { describe, it, vi } from "vitest";
 import { composeStories } from "@storybook/react";
 import * as stories from "./Header.stories";
-import { ReactNode } from "react";
+import { runStoryAndTest, expectElementWithText } from "../../_test-utils/testHelpers";
 
-// Compose the stories to apply decorators from the meta object
+vi.mock("next/link", () => ({
+  __esModule: true,
+  default: ({ href, children }: { href: string; children: React.ReactNode }) => 
+    React.createElement("a", { href }, children),
+}));
+
 const { LoggedIn, LoggedOut } = composeStories(stories);
 
-// Mock Next.js's Link
-vi.mock("next/link", () => {
-  return {
-    __esModule: true,
-    default: ({ href, children }: { href: string; children: ReactNode }) => (
-      <a href={href}>{children}</a>
-    ),
-  };
-});
-
 describe("Header", () => {
-  it("displays login link when user is not logged in", async () => {
-    await LoggedOut.run();
+  it("displays login link when user is not logged in", () => 
+    runStoryAndTest(LoggedOut, () => 
+      expectElementWithText("Login").toHaveAttribute("href", "/signin")
+    )
+  );
 
-    const loginLink = screen.getByText("Login");
-    expect(loginLink.closest("a")).toHaveAttribute("href", "/signin");
-  });
-
-  it("displays logout link when user is logged in", async () => {
-    await LoggedIn.run();
-
-    const logoutLink = screen.getByText("Logout");
-    expect(logoutLink.closest("a")).toHaveAttribute("href", "/logout");
-  });
+  it("displays logout link when user is logged in", () => 
+    runStoryAndTest(LoggedIn, () => 
+      expectElementWithText("Logout").toHaveAttribute("href", "/logout")
+    )
+  );
 });

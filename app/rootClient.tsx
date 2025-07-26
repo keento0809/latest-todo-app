@@ -8,9 +8,13 @@ export const RootClient = async ({ children }: PropsWithChildren) => {
   const path = headersList.get("x-path");
 
   return (
-    <div className="Root min-h-screen flex flex-col items-center justify-start">
+    <div className="Root min-h-screen flex flex-col">
       <Header />
-      {children}
+      <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 animate-fade-in">
+        <div className="w-full max-w-4xl mx-auto">
+          {children}
+        </div>
+      </main>
       {path !== "/" && <Footer />}
     </div>
   );

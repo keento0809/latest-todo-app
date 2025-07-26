@@ -3,8 +3,9 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { generateRandomDigits } from "@/app/_utils/utils";
 import { Todo, TodoObj } from "@/app/(home)/_types/home";
-import { addTodo, deleteTodo, updateTodo } from "@/app/(home)/_actions/actions";
+import { addTodo, deleteTodo, updateTodo, toggleTodo } from "@/app/(home)/_actions/actions";
 import { todoSchema } from "@/app/_libs/zodSchema";
+import { isCompleted } from "@/app/(home)/_utils/todoHelpers";
 
 type UseHomeProps = {
   todos: Todo[];
@@ -13,7 +14,8 @@ type UseHomeProps = {
 export const useHome = ({ todos }: UseHomeProps) => {
   const [todoState, setStateAction, isPending] = useActionState(
     async (prevState: TodoObj, formData: FormData) => {
-      switch (formData.get("actionType")) {
+      try {
+        switch (formData.get("actionType")) {
         case "ADD": {
           const newTodo: Todo = {
             id: generateRandomDigits(),
@@ -30,7 +32,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
         case "UPDATE": {
           const updateTodoId = Number(formData.get("todoId")) as number;
           const updateTodoTitle = formData.get("title") as string;
-          const updateTodoIsCompleted = formData.get("isCompleted") === "true";
+          const updateTodoIsCompleted = isCompleted(formData.get("isCompleted") as "true" | "false");
 
           await updateTodo({
             id: updateTodoId,
@@ -60,9 +62,31 @@ export const useHome = ({ todos }: UseHomeProps) => {
             todos: prevState.todos.filter((todo) => todo.id !== deleteTodoId),
           };
         }
+        case "TOGGLE": {
+          const toggleTodoId = Number(formData.get("todoId")) as number;
+
+          await toggleTodo({ id: toggleTodoId });
+
+          return {
+            todos: prevState.todos.map((todo) => {
+              if (todo.id === toggleTodoId) {
+                const currentIsCompleted = isCompleted(todo.isCompleted);
+                return {
+                  ...todo,
+                  isCompleted: !currentIsCompleted,
+                };
+              }
+              return todo;
+            }),
+          };
+        }
         default: {
           return prevState;
         }
+        }
+      } catch (error) {
+        console.error('Error handling todo action:', error);
+        return prevState;
       }
     },
     { todos }

@@ -12,9 +12,5 @@ export default async function Home() {
     args: { next: { tags: ["todos"] } },
   });
 
-  return (
-    <div className="min-h-svh flex justify-center items-center">
-      <HomeContainer todos={res.todos} />
-    </div>
-  );
+  return <HomeContainer todos={res.todos} />;
 }

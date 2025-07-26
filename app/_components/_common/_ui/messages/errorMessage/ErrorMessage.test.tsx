@@ -1,23 +1,14 @@
-import { composeStory } from "@storybook/react";
+import { describe, it } from "vitest";
 import * as stories from "./ErrorMessage.stories";
-import { describe, it, expect } from "vitest";
-import { screen } from "@testing-library/react";
+import { createStoryFromArgs, runStoryAndTest, expectElementWithText } from "../../../../_test-utils/testHelpers";
 
-const Default = composeStory(
-  {
-    args: {
-      children: "This field is required",
-    },
-  },
-  stories.default
-);
+const Default = createStoryFromArgs({ children: "This field is required" }, stories);
 
 describe("ErrorMessage", () => {
-  it("renders the error message", async () => {
-    await Default.run();
-
-    const errorMessage = screen.getByText("This field is required");
-    expect(errorMessage).toBeInTheDocument();
-    expect(errorMessage).toHaveClass("text-red-500 font-semibold text-xs py-1");
-  });
+  it("renders the error message", () => 
+    runStoryAndTest(Default, () => {
+      expectElementWithText("This field is required").toBeInDocument();
+      expectElementWithText("This field is required").toHaveClass("text-red-500 font-semibold text-xs py-1");
+    })
+  );
 });

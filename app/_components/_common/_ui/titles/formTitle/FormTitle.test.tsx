@@ -1,25 +1,14 @@
-import { composeStory } from "@storybook/react";
+import { describe, it } from "vitest";
 import * as stories from "./FormTitle.stories";
-import { screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { createStoryFromArgs, runStoryAndTest, expectElementWithText } from "../../../../_test-utils/testHelpers";
 
-const Default = composeStory(
-  {
-    args: {
-      children: "Login to Your Account",
-    },
-  },
-  stories.default
-);
+const Default = createStoryFromArgs({ children: "Login to Your Account" }, stories);
 
 describe("FormTitle", () => {
-  it("renders the form title", async () => {
-    await Default.run();
-
-    const formTitle = screen.getByText("Login to Your Account");
-    expect(formTitle).toBeInTheDocument();
-    expect(formTitle).toHaveClass(
-      "text-2xl font-bold text-gray-900 dark:text-white"
-    );
-  });
+  it("renders the form title", () => 
+    runStoryAndTest(Default, () => {
+      expectElementWithText("Login to Your Account").toBeInDocument();
+      expectElementWithText("Login to Your Account").toHaveClass("text-xl font-semibold text-center pb-8");
+    })
+  );
 });

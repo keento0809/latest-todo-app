@@ -44,10 +44,18 @@ export const BaseButton = ({
       type={type}
       disabled={isPending}
       onClick={onClick}
-      className="border-2 w-1/2 mx-auto border-purple-500 rounded-lg py-2 px-4 text-slate-800 hover:scale-105 transition-all disabled:opacity-50"
+      className="btn-primary w-full max-w-sm mx-auto relative overflow-hidden group"
       {...props}
     >
-      {children}
+      <span className={`transition-opacity duration-200 ${isPending ? 'opacity-0' : 'opacity-100'}`}>
+        {children}
+      </span>
+      {isPending && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+        </div>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
     </button>
   );
 };
