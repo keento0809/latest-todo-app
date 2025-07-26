@@ -30,18 +30,24 @@ export const HomePresentation = ({
         </p>
       </div>
       
-      <TodoForm
-        action={setStateAction}
-        isPending={isPending}
-        form={form}
-        fields={fields}
-      />
-      
-      <TodoList
-        todoState={todoState}
-        action={setStateAction}
-        isPending={isPending}
-      />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="order-2 lg:order-1">
+          <TodoForm
+            action={setStateAction}
+            isPending={isPending}
+            form={form}
+            fields={fields}
+          />
+        </div>
+        
+        <div className="order-1 lg:order-2">
+          <TodoList
+            todoState={todoState}
+            action={setStateAction}
+            isPending={isPending}
+          />
+        </div>
+      </div>
     </div>
   );
 };
