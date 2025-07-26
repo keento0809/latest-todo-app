@@ -10,8 +10,6 @@ export type HomePresentationProps = {
   isPending: boolean;
   form: TodoFormType;
   fields: TodoFields;
-  errorMessage: string | null;
-  clearError: () => void;
 };
 
 export const HomePresentation = ({
@@ -20,8 +18,6 @@ export const HomePresentation = ({
   isPending,
   form,
   fields,
-  errorMessage,
-  clearError,
 }: HomePresentationProps) => {
   return (
     <div className="w-full space-y-12">
@@ -34,12 +30,16 @@ export const HomePresentation = ({
         </p>
       </div>
       
-      {errorMessage && (
+      {todoState.error && (
         <div className="max-w-2xl mx-auto mb-6">
           <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-lg flex items-center justify-between">
-            <span>{errorMessage}</span>
+            <span>{todoState.error}</span>
             <button
-              onClick={clearError}
+              onClick={() => {
+                const formData = new FormData();
+                formData.append('actionType', 'CLEAR_ERROR');
+                setStateAction(formData);
+              }}
               className="text-error-500 hover:text-error-700 ml-4"
               aria-label="Dismiss error"
             >

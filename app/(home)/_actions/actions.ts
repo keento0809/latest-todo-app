@@ -14,24 +14,31 @@ export const addTodo = async ({
   formData: FormData;
   optimisticId?: number;
 }) => {
-  const submission = parseWithZod(formData, { schema: todoSchema });
+  try {
+    const submission = parseWithZod(formData, { schema: todoSchema });
 
-  if (submission.status !== "success") {
-    return submission.reply();
+    if (submission.status !== "success") {
+      return { error: "Invalid form data. Please check your input." };
+    }
+
+    const id = optimisticId || Math.floor(Math.random() * 100000);
+    const title = submission.value.title;
+    const isCompleted = submission.value.isCompleted === "true";
+
+    await db.insert(todo).values({
+      id,
+      title,
+      isCompleted,
+    });
+    
+    // Only revalidate specific path instead of full page
+    revalidatePath("/", "page");
+    
+    return { success: true };
+  } catch (error) {
+    console.error('Database error adding todo:', error);
+    return { error: "Failed to add todo. Please try again." };
   }
-
-  const id = optimisticId || Math.floor(Math.random() * 100000);
-  const title = submission.value.title;
-  const isCompleted = submission.value.isCompleted === "true";
-
-  await db.insert(todo).values({
-    id,
-    title,
-    isCompleted,
-  });
-  
-  // Only revalidate specific path instead of full page
-  revalidatePath("/", "page");
 };
 
 export const deleteTodo = async ({ id }: { id: number }) => {

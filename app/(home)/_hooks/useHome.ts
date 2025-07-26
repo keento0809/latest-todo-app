@@ -1,4 +1,4 @@
-import { useActionState, useState, useCallback } from "react";
+import { useActionState } from "react";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { generateRandomDigits } from "@/app/_utils/utils";
@@ -12,8 +12,6 @@ type UseHomeProps = {
 };
 
 export const useHome = ({ todos }: UseHomeProps) => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  
   const [todoState, setStateAction, isPending] = useActionState(
     async (prevState: TodoObj, formData: FormData) => {
       try {
@@ -25,21 +23,25 @@ export const useHome = ({ todos }: UseHomeProps) => {
             isCompleted: formData.get("isCompleted") as "true" | "false",
           };
 
-          // Optimistic update: Update UI immediately
-          const optimisticState = {
-            todos: [...prevState.todos, newTodo],
-          };
-
-          // Start server action in background with error handling
-          addTodo({ 
+          // Call server action and handle response
+          const result = await addTodo({ 
             formData,
             optimisticId: newTodo.id 
-          }).catch((error) => {
-            console.error('Failed to add todo:', error);
-            setErrorMessage('Failed to add todo. Please try again.');
           });
 
-          return optimisticState;
+          // If server action returned error, return it in state
+          if (result && result.error) {
+            return {
+              ...prevState,
+              error: result.error
+            };
+          }
+
+          // Success: add todo to state
+          return {
+            todos: [...prevState.todos, newTodo],
+            error: null
+          };
         }
         case "UPDATE": {
           const updateTodoId = Number(formData.get("todoId")) as number;
@@ -92,6 +94,12 @@ export const useHome = ({ todos }: UseHomeProps) => {
             }),
           };
         }
+        case "CLEAR_ERROR": {
+          return {
+            ...prevState,
+            error: null
+          };
+        }
         default: {
           return prevState;
         }
@@ -101,7 +109,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
         return prevState;
       }
     },
-    { todos }
+    { todos, error: null }
   );
 
   const [form, fields] = useForm({
@@ -118,7 +126,5 @@ export const useHome = ({ todos }: UseHomeProps) => {
     isPending,
     form,
     fields,
-    errorMessage,
-    clearError: useCallback(() => setErrorMessage(null), []),
   };
 };
