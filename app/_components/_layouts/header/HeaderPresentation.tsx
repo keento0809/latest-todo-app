@@ -24,7 +24,7 @@ type HeaderPresentationProps = {
 
 export const HeaderPresentation = ({ isLoggedIn }: HeaderPresentationProps) => {
   return (
-    <header className="w-full py-4 px-4 lg:px-8 sticky top-0 left-0 z-50 bg-white/80 backdrop-blur-lg border-b border-neutral-200/50 shadow-soft">
+    <header className="w-full py-2 px-4 lg:px-8 sticky top-0 left-0 z-50 bg-white/80 backdrop-blur-lg border-b border-neutral-200/50 shadow-soft">
       <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
         <Link 
           href="/" 

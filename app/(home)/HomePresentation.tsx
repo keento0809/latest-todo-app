@@ -22,7 +22,7 @@ export const HomePresentation = ({
   return (
     <div className="w-full space-y-12">
       <div className="text-center space-y-4 mb-12">
-        <h1 className="text-4xl lg:text-6xl font-bold text-gradient">
+        <h1 className="text-3xl lg:text-4xl font-bold text-gradient">
           LatestTodo
         </h1>
         <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
