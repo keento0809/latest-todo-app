@@ -1,4 +1,4 @@
-import { useActionState } from "react";
+import { useActionState, useState, useCallback } from "react";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { generateRandomDigits } from "@/app/_utils/utils";
@@ -12,6 +12,8 @@ type UseHomeProps = {
 };
 
 export const useHome = ({ todos }: UseHomeProps) => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  
   const [todoState, setStateAction, isPending] = useActionState(
     async (prevState: TodoObj, formData: FormData) => {
       try {
@@ -28,12 +30,13 @@ export const useHome = ({ todos }: UseHomeProps) => {
             todos: [...prevState.todos, newTodo],
           };
 
-          // Start server action in background (don't await)
+          // Start server action in background with error handling
           addTodo({ 
             formData,
             optimisticId: newTodo.id 
           }).catch((error) => {
             console.error('Failed to add todo:', error);
+            setErrorMessage('Failed to add todo. Please try again.');
           });
 
           return optimisticState;
@@ -115,5 +118,7 @@ export const useHome = ({ todos }: UseHomeProps) => {
     isPending,
     form,
     fields,
+    errorMessage,
+    clearError: useCallback(() => setErrorMessage(null), []),
   };
 };

@@ -10,6 +10,8 @@ export type HomePresentationProps = {
   isPending: boolean;
   form: TodoFormType;
   fields: TodoFields;
+  errorMessage: string | null;
+  clearError: () => void;
 };
 
 export const HomePresentation = ({
@@ -18,6 +20,8 @@ export const HomePresentation = ({
   isPending,
   form,
   fields,
+  errorMessage,
+  clearError,
 }: HomePresentationProps) => {
   return (
     <div className="w-full space-y-12">
@@ -29,6 +33,21 @@ export const HomePresentation = ({
           Organize your tasks beautifully and boost your productivity with our modern todo application.
         </p>
       </div>
+      
+      {errorMessage && (
+        <div className="max-w-2xl mx-auto mb-6">
+          <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-lg flex items-center justify-between">
+            <span>{errorMessage}</span>
+            <button
+              onClick={clearError}
+              className="text-error-500 hover:text-error-700 ml-4"
+              aria-label="Dismiss error"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="order-2 lg:order-1">

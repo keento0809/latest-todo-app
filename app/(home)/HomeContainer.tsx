@@ -9,7 +9,7 @@ type HomeContainerProps = {
 };
 
 export const HomeContainer = ({ todos }: HomeContainerProps) => {
-  const { todoState, setStateAction, isPending, form, fields } = useHome({
+  const { todoState, setStateAction, isPending, form, fields, errorMessage, clearError } = useHome({
     todos,
   });
 
@@ -19,6 +19,8 @@ export const HomeContainer = ({ todos }: HomeContainerProps) => {
     isPending,
     form,
     fields,
+    errorMessage,
+    clearError,
   };
 
   return <HomePresentation {...props} />;
