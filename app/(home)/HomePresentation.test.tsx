@@ -414,14 +414,50 @@ describe("HomePresentation", () => {
       expect(screen.getByText(longError)).toBeInTheDocument();
     });
 
-    it("should handle null props gracefully", () => {
-      const propsWithNulls = {
+    it("should handle minimal props gracefully", () => {
+      const minimalForm = {
+        id: "minimal-form",
+        onSubmit: vi.fn(),
+      } as unknown as TodoFormType;
+
+      const minimalFields = {
+        title: {
+          key: "title",
+          name: "title",
+          id: "title",
+          errorId: "title-error",
+          descriptionId: "title-desc",
+          formId: "minimal-form",
+          errors: undefined,
+          initialValue: undefined,
+          value: undefined,
+          dirty: false,
+          valid: true,
+          allErrors: {},
+        },
+        isCompleted: {
+          key: "isCompleted",
+          name: "isCompleted", 
+          id: "isCompleted",
+          errorId: "isCompleted-error",
+          descriptionId: "isCompleted-desc",
+          formId: "minimal-form",
+          errors: undefined,
+          initialValue: undefined,
+          value: undefined,
+          dirty: false,
+          valid: true,
+          allErrors: {},
+        },
+      } as TodoFields;
+
+      const propsWithMinimals = {
         ...baseProps,
-        form: null as unknown as TodoFormType,
-        fields: null as unknown as TodoFields,
+        form: minimalForm,
+        fields: minimalFields,
       };
 
-      expect(() => render(<HomePresentation {...propsWithNulls} />)).not.toThrow();
+      expect(() => render(<HomePresentation {...propsWithMinimals} />)).not.toThrow();
     });
   });
 

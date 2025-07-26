@@ -3,10 +3,27 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TodoForm } from "./TodoForm";
 import { TodoFields, TodoFormType } from "@/app/(home)/_types/home";
+import { ReactNode } from "react";
+
+// Mock component interfaces
+interface MockBaseButtonProps {
+  children: ReactNode;
+  isPending?: boolean;
+  type?: "button" | "submit" | "reset";
+  [key: string]: unknown;
+}
+
+interface MockErrorMessageProps {
+  children?: ReactNode;
+}
+
+interface MockRadioGroupProps {
+  fields: TodoFields;
+}
 
 // Mock the child components
 vi.mock("@/app/_components/_common/_ui/buttons/baseButton/BaseButton", () => ({
-  BaseButton: ({ children, isPending, type, ...props }: any) => (
+  BaseButton: ({ children, isPending, type, ...props }: MockBaseButtonProps) => (
     <button 
       type={type}
       disabled={isPending}
@@ -20,14 +37,14 @@ vi.mock("@/app/_components/_common/_ui/buttons/baseButton/BaseButton", () => ({
 }));
 
 vi.mock("@/app/_components/_common/_ui/messages/errorMessage/ErrorMessage", () => ({
-  ErrorMessage: ({ children }: any) => (
+  ErrorMessage: ({ children }: MockErrorMessageProps) => (
     children ? <div data-testid="error-message">{children}</div> : null
   ),
 }));
 
 vi.mock("@/app/_components/_common/_ui/radioGroups/radioGroup/RadioGroup", () => ({
-  RadioGroup: ({ fields }: any) => (
-    <div data-testid="radio-group">
+  RadioGroup: ({ fields }: MockRadioGroupProps) => (
+    <div data-testid="radio-group" data-field-name={fields.isCompleted.name}>
       <input 
         type="radio" 
         name="isCompleted" 
@@ -156,6 +173,7 @@ describe("TodoForm", () => {
       const form = screen.getByRole("form");
       await user.click(screen.getByTestId("submit-button"));
 
+      expect(form).toBeInTheDocument();
       expect(mockOnSubmit).toHaveBeenCalled();
     });
 

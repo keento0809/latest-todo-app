@@ -3,16 +3,42 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ListItem } from "./ListItem";
 import { Todo } from "@/app/(home)/_types/home";
+import { ReactNode } from "react";
+
+// Mock component interfaces
+interface MockPlusIconProps {
+  className?: string;
+}
+
+interface MockEditableTitleProps {
+  todo: Todo;
+  action: (payload: FormData) => void;
+}
+
+interface MockDeleteDialogProps {
+  todo: Todo;
+  action: (payload: FormData) => void;
+}
+
+interface MockAlertDialogRootProps {
+  children: ReactNode;
+}
+
+interface MockAlertDialogTriggerProps {
+  children: ReactNode;
+  className?: string;
+  [key: string]: unknown;
+}
 
 // Mock the child components
 vi.mock("@/app/_components/_icons/plusIcon/PlusIcon", () => ({
-  PlusIcon: ({ className }: any) => (
+  PlusIcon: ({ className }: MockPlusIconProps) => (
     <div data-testid="plus-icon" className={className}>+</div>
   ),
 }));
 
 vi.mock("@/app/_components/_common/_ui/titles/editableTitle/EditableTitle", () => ({
-  EditableTitle: ({ todo, action }: any) => (
+  EditableTitle: ({ todo, action }: MockEditableTitleProps) => (
     <div data-testid="editable-title" data-todo-id={todo.id}>
       <span>{todo.title}</span>
       <button onClick={() => action(new FormData())}>Edit</button>
@@ -21,7 +47,7 @@ vi.mock("@/app/_components/_common/_ui/titles/editableTitle/EditableTitle", () =
 }));
 
 vi.mock("@/app/_components/_common/_ui/dialogs/deleteDialog/DeleteDialog", () => ({
-  DeleteDialog: ({ todo, action }: any) => (
+  DeleteDialog: ({ todo }: MockDeleteDialogProps) => (
     <div data-testid="delete-dialog" data-todo-id={todo.id}>
       Delete Dialog for {todo.title}
     </div>
@@ -30,8 +56,8 @@ vi.mock("@/app/_components/_common/_ui/dialogs/deleteDialog/DeleteDialog", () =>
 
 vi.mock("@base-ui-components/react/alert-dialog", () => ({
   AlertDialog: {
-    Root: ({ children }: any) => <div data-testid="alert-dialog-root">{children}</div>,
-    Trigger: ({ children, className, ...props }: any) => (
+    Root: ({ children }: MockAlertDialogRootProps) => <div data-testid="alert-dialog-root">{children}</div>,
+    Trigger: ({ children, className, ...props }: MockAlertDialogTriggerProps) => (
       <button data-testid="alert-dialog-trigger" className={className} {...props}>
         {children}
       </button>
@@ -314,16 +340,16 @@ describe("ListItem", () => {
   });
 
   describe("Edge Cases", () => {
-    it("should handle undefined completion status", () => {
-      const undefinedTodo: Todo = {
+    it("should handle string false completion status", () => {
+      const stringFalseTodo: Todo = {
         id: 5,
-        title: "Undefined Status",
-        isCompleted: undefined as any,
+        title: "String False Status",
+        isCompleted: "false" as const,
       };
 
-      render(<ListItem todo={undefinedTodo} action={mockAction} />);
+      render(<ListItem todo={stringFalseTodo} action={mockAction} />);
 
-      // Should treat undefined as pending (falsy)
+      // Should treat "false" string as pending
       expect(screen.getByRole("button", { name: "Mark as complete" })).toBeInTheDocument();
       expect(screen.getByText("Pending")).toBeInTheDocument();
     });
