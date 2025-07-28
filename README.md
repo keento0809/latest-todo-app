@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 #### Hotfix readme
 
-Test git revert
+I am testing git revert again !!!
 
 First, run the development server:
 
